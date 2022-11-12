@@ -14,9 +14,11 @@ import { AnimatePresence, motion } from "framer-motion";
 const layoutClass = "p-6 m-auto max-w-7xl";
 
 export const getServerSideProps = async (context) => {
-  const data = await fetch(context.req.headers.referer + "/api/data").then(
-    (r) => r.json()
-  );
+  const data = await fetch(
+    (process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : process.env.HOST_URL) + "/api/data"
+  ).then((r) => r.json());
 
   return {
     props: {
