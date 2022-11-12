@@ -45,9 +45,11 @@ const HeroText = ({
             </div>
           ))}
         </span>
-        {!disableSeparator && <div>.</div>}
+        {!disableSeparator && (
+          <div className="font-GTAmericaExpandedRegular">.</div>
+        )}
         <span className="font-GtAmericaExpandedBlack whitespace-nowrap">
-          {rightText}.
+          {rightText}
         </span>
       </div>
     </div>

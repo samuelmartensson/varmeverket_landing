@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import HeaderAndText from "../Components/HeaderAndText";
 import CallToActionLink from "./CallToActionLink";
@@ -110,11 +110,34 @@ function Mobile({
 }
 
 export default function Constilation(props) {
+  const { items } = props;
+  const [currentData, setCurrentData] = useState({
+    maxLength: items.length - 1,
+    index: 0,
+  });
   const size = useWindowSize();
+  const parsedItems = items.map((item) => ({
+    ...item,
+    srcList: item.srcList.map(({ filename }) => filename),
+  }));
 
   return (
-    <div>
-      {size.width > 1000 ? <FullSize {...props} /> : <Mobile {...props} />}
-    </div>
+    <>
+      {size.width > 1000 ? (
+        <FullSize
+          {...props}
+          {...items[currentData.index]}
+          setItem={setCurrentData}
+          items={parsedItems}
+        />
+      ) : (
+        <Mobile
+          {...props}
+          {...items[currentData.index]}
+          setItem={setCurrentData}
+          items={parsedItems}
+        />
+      )}
+    </>
   );
 }

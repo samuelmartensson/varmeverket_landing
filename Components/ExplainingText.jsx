@@ -6,10 +6,9 @@ const textClass = "text-stone-500 text-opacity-80 whitespace-nowrap";
 const textClassAbs =
   "absolute overflow-hidden whitespace-nowrap top-0 bottom-0 left-0";
 
-const ExplainingText = ({ rows, prompt, cta }) => {
+const ExplainingText = ({ rows, prompt, cta = "" }) => {
   const containerRef = useRef();
   const [scrollY, setScrollY] = useState(0);
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["end end", "start start"],
@@ -41,9 +40,9 @@ const ExplainingText = ({ rows, prompt, cta }) => {
                   }}
                   className={textClassAbs}
                 >
-                  {row}
+                  {row.text}
                 </div>
-                <div className={textClass}>{row}</div>
+                <div className={textClass}>{row.text}</div>
               </div>
             ))}
           </h1>

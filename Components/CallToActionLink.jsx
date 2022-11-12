@@ -33,7 +33,7 @@ const lineVariant = {
   },
 };
 
-const CallToActionLink = ({ href, text }) => {
+const CallToActionLink = ({ href, text = "" }) => {
   const { setIsOpen } = useModalContext();
 
   return (

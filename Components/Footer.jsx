@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 const Footer = ({ data }) => {
   const {
     contact,
-    largeHeader,
+    largeHeaderThin,
+    largeHeaderBold,
+    tosHref,
+    tosText,
     conversation,
     email,
     officeHeader,
     officeText,
-    office,
+    officeRows,
     policyHeader,
-    tos,
     socialsHeader,
     socials,
   } = data;
@@ -40,7 +42,7 @@ const Footer = ({ data }) => {
   return (
     <footer
       style={{ filter: `invert(${scrollY}%)` }}
-      className="bg-black relative"
+      className="bg-black relative mt-40"
     >
       <motion.div
         style={{
@@ -55,8 +57,8 @@ const Footer = ({ data }) => {
           {contact}
         </p>
         <h1 className="md:text-7xl text-[40px] md:mb-12 mb-4">
-          <span>{largeHeader.thin}</span>
-          <span className="font-bold">{largeHeader.bold}</span>
+          <span>{largeHeaderThin}</span>
+          <span className="font-bold">{largeHeaderBold}</span>
         </h1>
         <div className="pb-12">
           <p className="mb-8">{conversation}</p>
@@ -70,17 +72,19 @@ const Footer = ({ data }) => {
           <div className="text-4xl mb-4">{officeText}</div>
           <div className="grid gap-4 grid-cols-2">
             <div>
-              <p className="text-sm">{office.row1}</p>
-              <p className="text-sm">{office.row2}</p>
-              <p className="text-sm mb-6">{office.row3}</p>
-              <p className="mb-4 text-2xl">{policyHeader}</p>
+              {officeRows.map((item) => (
+                <p key={item} className="text-sm">
+                  {item}
+                </p>
+              ))}
+              <p className="mb-4 mt-6 text-2xl">{policyHeader}</p>
               <a
-                href={tos.href}
+                href={tosHref}
                 target="_blank"
                 rel="noreferrer"
                 className="underline"
               >
-                {tos.text}
+                {tosText}
               </a>
             </div>
             <div>

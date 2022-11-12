@@ -205,18 +205,3 @@ const footerData = {
     },
   ],
 };
-
-export default function handler(req, res) {
-  res.status(200).json({
-    rotatingText1,
-    rotatingText2,
-    paragraph1,
-    paragraph2,
-    scrollingText,
-    showCase1,
-    showCase2,
-    showCase3,
-    navbarData,
-    footerData,
-  });
-}
