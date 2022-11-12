@@ -80,7 +80,7 @@ const exploreOurPlaceholderData = [
   },
   {
     srcList: ["https://hypermedia.varmeverket.com/VV-KONSTVERKET.webm"],
-    headerText1: "KONSTVERKET",
+    headerText1: "KONST",
     headerText2: "VERKET",
     textParagraph:
       "On top of Panncentralen are Konstverket. Here we will house 10 artists per year who will also hold exhibitions and decorate Värmeverket.",
