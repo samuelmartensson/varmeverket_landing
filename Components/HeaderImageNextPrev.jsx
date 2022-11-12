@@ -35,10 +35,13 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
   }, [scrollY, height, cancelScroll, srcList.length, currentIndex, index]);
 
   useEffect(() => {
-    if (index === currentIndex) {
-      videoRef.current?.play();
-    } else {
-      videoRef.current?.pause();
+    if (videoRef.current) {
+      if (index === currentIndex) {
+        videoRef.current.currentTime = 0;
+        videoRef.current?.play();
+      } else {
+        videoRef.current?.pause();
+      }
     }
   }, [index, currentIndex]);
 
@@ -67,7 +70,6 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
           ))}
         </div>
       </div>
-
       <motion.div
         key={index}
         className="absolute top-0 w-full h-full"
@@ -75,22 +77,21 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
           y: spring,
         }}
       >
-        {srcList.map((src, index) => (
-          <div className="w-full h-full" key={index}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <video
-              ref={videoRef}
-              className="w-full h-full object-cover"
-              playsInline
-              poster={src}
-              autoPlay
-              muted
-              loop
-            >
-              <source src={src} />
-            </video>
-          </div>
-        ))}
+        {srcList.map((src, index) => {
+          return (
+            <div className="w-full h-full" key={index}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                muted
+                loop
+              >
+                <source src={src + "#t=0"} />
+              </video>
+            </div>
+          );
+        })}
       </motion.div>
     </div>
   );

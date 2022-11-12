@@ -61,6 +61,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.image-bg,
 .video-bg {
   object-fit: cover;
   position: fixed;
