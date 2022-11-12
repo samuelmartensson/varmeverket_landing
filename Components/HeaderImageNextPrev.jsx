@@ -89,7 +89,6 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
             >
               <source src={src} />
             </video>
-            {/* <img className="w-full h-full object-cover" src={src} alt="" /> */}
           </div>
         ))}
       </motion.div>
@@ -99,8 +98,6 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
 
 const HeaderImageNextPrev = ({
   classNameTextDiv,
-  prevHref,
-  nextHref,
   prevText,
   nextText,
   header1,
@@ -130,7 +127,7 @@ const HeaderImageNextPrev = ({
   return (
     <>
       <div className={classNameTextDiv + " mb-4 z-10"}>
-        <h1 className="text-3xl lg:text-5xl font-GtAmericaExtended">
+        <h1 className="text-3xl lg:text-5xl font-GTAmericaExpandedRegular">
           {header1}
         </h1>
         <h1 className="text-3xl lg:text-5xl font-semibold font-GtAmericaExpandedBlack">
@@ -146,7 +143,9 @@ const HeaderImageNextPrev = ({
           document.body.style = "";
         }}
         onMouseEnter={() => {
-          document.body.style = "overflow: hidden";
+          if (items[currentIndex].srcList.length > 1) {
+            document.body.style = "overflow: hidden";
+          }
           setCancelScroll(true);
         }}
         onMouseLeave={() => {
@@ -160,7 +159,6 @@ const HeaderImageNextPrev = ({
               <VerticalScrollItem
                 cancelScroll={cancelScroll}
                 srcList={item.srcList}
-                videoSrc={item.videoSrc}
                 key={index}
                 {...{ currentIndex, index }}
               />
@@ -173,7 +171,6 @@ const HeaderImageNextPrev = ({
             onClick={() => {
               previous();
             }}
-            href={prevHref}
           >
             {prevText}
           </button>
@@ -182,7 +179,6 @@ const HeaderImageNextPrev = ({
             onClick={() => {
               next();
             }}
-            href={nextHref}
           >
             {nextText}
           </button>

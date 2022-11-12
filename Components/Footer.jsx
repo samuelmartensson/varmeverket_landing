@@ -1,7 +1,20 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const Footer = () => {
+const Footer = ({ data }) => {
+  const {
+    contact,
+    largeHeader,
+    conversation,
+    email,
+    officeHeader,
+    officeText,
+    office,
+    policyHeader,
+    tos,
+    socialsHeader,
+    socials,
+  } = data;
   const [scrollY, setScrollY] = useState(0);
 
   const { scrollYProgress } = useScroll();
@@ -37,46 +50,55 @@ const Footer = () => {
         }}
         className="background bg-black pointer-events-none absolute top-0 w-full bg-blue h-[125vh] z-10"
       />
-      <div className="max-w-7xl h-screen  text-white md:p-8 p-4 flex flex-col justify-center m-auto">
-        <p id="contact" className="mb-8 font-semibold">
-          CONTACT
+      <div className="max-w-7xl h-screen text-white md:p-8 p-6 flex flex-col justify-center m-auto">
+        <p id="contact" className="md:text-xl mb-8">
+          {contact}
         </p>
-        <h1 className="md:text-7xl text-5xl mb-6">
-          <span>KEEP.IN.</span>
-          <span className="font-bold">TOUCH.</span>
+        <h1 className="md:text-7xl text-[40px] md:mb-12 mb-4">
+          <span>{largeHeader.thin}</span>
+          <span className="font-bold">{largeHeader.bold}</span>
         </h1>
-        <h1 className="mb-8 text-lg md:text-2xl">
-          <a href="mailto:info@varmeverket.com">info@varmeverket.com</a>
-        </h1>
-        <div className="flex pb-12">
-          <div className="mr-20 md:mr-28 2xl:mr-40">
-            <h2 className="md:text-2xl mb-6">Our office</h2>
-            <h1 className="md:text-4xl mb-2">Stockholm</h1>
-            <p className="md:text-md">Bredängsvägen 203</p>
-            <p className="md:text-md">12734 Skärholmen</p>
-            <p className="md:text-md mb-12"> Stockholm </p>
-            <h2 className="md:text-md mb-8 ">OUR POLICY</h2>
-            <a className="underline md:text-md">TERMS OF SERVICE</a>
-          </div>
-          <div>
-            <h2 className="text-2xl mb-6">Our socials</h2>
-            <a
-              href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline text-2xl"
-            >
-              LinkedIn
-            </a>
-            <br />
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline text-2xl"
-            >
-              Instagram
-            </a>
+        <div className="pb-12">
+          <p className="mb-8">{conversation}</p>
+          <a
+            className="block mb-8 text-2xl md:text-4xl"
+            href="mailto:info@varmeverket.com"
+          >
+            {email}
+          </a>
+          <div className="text-2xl mb-6">{officeHeader}</div>
+          <div className="text-4xl mb-4">{officeText}</div>
+          <div className="grid gap-4 grid-cols-2">
+            <div>
+              <p className="text-sm">{office.row1}</p>
+              <p className="text-sm">{office.row2}</p>
+              <p className="text-sm mb-6">{office.row3}</p>
+              <p className="mb-4 text-2xl">{policyHeader}</p>
+              <a
+                href={tos.href}
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
+                {tos.text}
+              </a>
+            </div>
+            <div>
+              <p className="text-2xl mb-8">{socialsHeader}</p>
+              <div className="underline text-xl">
+                {socials.map((item) => (
+                  <a
+                    key={item.text}
+                    className="block"
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.text}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import CallToActionLink from "./CallToActionLink";
 import { motion, useScroll, useSpring } from "framer-motion";
 
-const textClass = "text-stone-500 text-opacity-80";
+const textClass = "text-stone-500 text-opacity-80 whitespace-nowrap";
 const textClassAbs =
   "absolute overflow-hidden whitespace-nowrap top-0 bottom-0 left-0";
 
-const ExplainingText = ({ rows, prompt }) => {
+const ExplainingText = ({ rows, prompt, cta }) => {
   const containerRef = useRef();
   const [scrollY, setScrollY] = useState(0);
 
@@ -28,7 +28,7 @@ const ExplainingText = ({ rows, prompt }) => {
   }, [scroll]);
 
   return (
-    <div ref={containerRef} className="flex justify-center -m-4">
+    <div ref={containerRef} className="flex justify-center">
       <div className="flex justify-center">
         <div className="font-GtAmerica">
           <h1 className="xl:text-6xl md:text-4xl text-2xl">
@@ -56,7 +56,7 @@ const ExplainingText = ({ rows, prompt }) => {
           <div className="flex justify-center">
             <CallToActionLink
               href={"https://www.varmeverket.com/sign-up"}
-              text="APPLY NOW"
+              text={cta}
             />
           </div>
         </div>

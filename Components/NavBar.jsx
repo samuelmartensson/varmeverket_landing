@@ -1,28 +1,28 @@
 import { useWindowSize } from "../hooks/useWindowSize";
-import useCollapse from "react-collapsed";
 import { useModalContext } from "./ModalContextProvider";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const MENU_BREAKPOINT = 1024;
 
-export default function NavBar() {
+export default function NavBar({ data }) {
+  const { socials, email, phoneNumber } = data;
   const router = useRouter();
   const { setIsOpen } = useModalContext();
-  const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
-    useCollapse();
+  const [isExpanded, setExpanded] = useState(false);
   const size = useWindowSize();
   const [options, setOptions] = useState({ hidden: false, fill: false });
-  const [data, setData] = useState({
+  const [scrollData, setScrollData] = useState({
     x: 0,
     y: 0,
     lastX: 0,
     lastY: 0,
   });
-  const { lastY, y } = data;
+  const { lastY, y } = scrollData;
 
   const handleScroll = () => {
-    setData((last) => {
+    setScrollData((last) => {
       return {
         x: window.scrollX,
         y: window.scrollY,
@@ -44,11 +44,12 @@ export default function NavBar() {
       shouldHide = true;
       setExpanded(false);
     }
+
     setOptions({
       hidden: shouldHide,
-      fill: y > 20 || size.width < MENU_BREAKPOINT,
+      fill: y > 20 || isExpanded,
     });
-  }, [y, lastY, setExpanded, size.width]);
+  }, [y, lastY, setExpanded, isExpanded]);
 
   useEffect(() => {
     if (size.width > MENU_BREAKPOINT) {
@@ -70,6 +71,7 @@ export default function NavBar() {
   return (
     <div
       style={{
+        height: isExpanded ? "100%" : "unset",
         transform: options.hidden ? "translateY(-100%)" : "translateY(0%)",
       }}
       className={`fixed top-0 left-0 right-0 duration-300 z-50 ${
@@ -116,68 +118,81 @@ export default function NavBar() {
           ) : (
             <div
               className="header ml-auto underline text-xl place-self-end self-center"
-              onMouseDown={() => !isExpanded && setIsOpen(false)}
-              {...getToggleProps()}
+              onClick={() => setExpanded((s) => !s)}
             >
               {isExpanded ? "CLOSE" : "MENU"}
             </div>
           )}
         </div>
-
-        <div {...getCollapseProps()} className="col-span-2 ">
-          <div className="content text-left mt-24 mb-12">
-            <ul className="font-GtAmericaExpandedBlack text-4xl ">
-              <li className="mb-8">
-                <a
-                  className="cursor-pointer hover:underline"
-                  href="https://www.varmeverket.com/sign-up"
-                >
-                  APPLY
-                </a>
-              </li>
-              <li className="mb-8">
-                <a
-                  className="cursor-pointer hover:underline"
-                  onClick={() => handleNavigate("community")}
-                  href="#community"
-                >
-                  COMMUNITY
-                </a>
-              </li>
-              <li className="mb-8">
-                <a
-                  className="cursor-pointer hover:underline"
-                  onClick={() => handleNavigate("spaces")}
-                  href="#spaces"
-                >
-                  SPACES
-                </a>
-              </li>
-              <li className="mb-8">
-                <a
-                  className="cursor-pointer hover:underline"
-                  onClick={() => handleNavigate("contact")}
-                  href="#contact"
-                >
-                  CONTACT
-                </a>
-              </li>
-            </ul>
-            <div>
-              <a href="tel:+46 72 123 45 67"> +46 72 123 45 67</a>
-              <br />
-              <a href="mailto: booking@varmeverket.com">
-                booking@varmeverket.com
-              </a>
-            </div>
-          </div>
-          <div className="flex space-x-4 underline text-sm">
-            <a>TWITTER</a>
-            <a>INSTAGRAM</a>
-            <a>FACEBOOK</a>
-            <a>TIKTOK</a>
-          </div>
-        </div>
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="h-full overflow-hidden"
+            >
+              <div className="content text-left mt-24 mb-12">
+                <ul className="font-GtAmericaExpandedBlack text-4xl ">
+                  <li className="mb-8">
+                    <a
+                      className="cursor-pointer hover:underline"
+                      href="https://www.varmeverket.com/sign-up"
+                    >
+                      APPLY
+                    </a>
+                  </li>
+                  <li className="mb-8">
+                    <a
+                      className="cursor-pointer hover:underline"
+                      onClick={() => handleNavigate("community")}
+                      href="#community"
+                    >
+                      COMMUNITY
+                    </a>
+                  </li>
+                  <li className="mb-8">
+                    <a
+                      className="cursor-pointer hover:underline"
+                      onClick={() => handleNavigate("spaces")}
+                      href="#spaces"
+                    >
+                      SPACES
+                    </a>
+                  </li>
+                  <li className="mb-8">
+                    <a
+                      className="cursor-pointer hover:underline"
+                      onClick={() => handleNavigate("contact")}
+                      href="#contact"
+                    >
+                      CONTACT
+                    </a>
+                  </li>
+                </ul>
+                <div>
+                  <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
+                  <br />
+                  <a href={`mailto: ${email}`}>{email}</a>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-4 underline text-sm">
+                {socials.map((item) => (
+                  <a
+                    key={item.text}
+                    className="block"
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.text}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

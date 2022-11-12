@@ -6,21 +6,18 @@ const ScrollingText = ({ text }) => {
 
   return (
     <div className="max-w-full overflow-hidden font-bold text-6xl lg:text-[5vw]">
-      <a
-        onClick={() => setIsOpen(true)}
-        className="cursor-pointer relative block h-32 whitespace-nowrap"
-      >
-        <p className="marquee">
-          <span className="block">
+      <div className=" relative block h-screen max-h-64 whitespace-nowrap">
+        <p onClick={() => setIsOpen(true)} className="marquee">
+          <span className="block cursor-pointer">
             {text}_-_{text}_-_{text}_-_{text}_-_
           </span>
         </p>
-        <p className="marquee marquee2">
-          <span className="block">
+        <p onClick={() => setIsOpen(true)} className="marquee marquee2">
+          <span className="block cursor-pointer">
             {text}_-_{text}_-_{text}_-_{text}_-_
           </span>
         </p>
-      </a>
+      </div>
     </div>
   );
 };

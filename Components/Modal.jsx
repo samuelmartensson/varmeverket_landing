@@ -4,7 +4,8 @@ import { useModalContext } from "./ModalContextProvider";
 
 const Modal = () => {
   const [spaces, setSpaces] = useState([]);
-  const [isSubmited, setIsSubmited] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
   const [formValues, setFormValues] = useState({
     space_name: "",
     start: "",
@@ -29,18 +30,22 @@ const Modal = () => {
 
   const { setIsOpen } = useModalContext();
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
-    const response = fetch("https://api.varmeverket.com/v2/bookings", {
+    const response = await fetch("https://api.varmeverket.com/v2/bookings", {
       body: JSON.stringify(formValues),
       headers: {
         contentType: "application/json",
       },
       method: "POST",
     });
-    setIsSubmited(true);
-    return response;
+
+    if (response.status >= 400) {
+      setError("Something didn't go as planned. Try refreshing the page.");
+    } else {
+      setIsSubmitted(true);
+    }
   };
 
   const handleChange = (event) => {
@@ -72,6 +77,7 @@ const Modal = () => {
               SELECT THE SPACE
             </label>
             <select
+              required
               className="w-full p-4 bg-black bg-opacity-80"
               style={{ borderRight: "16px solid transparent" }}
               name="space_name"
@@ -92,6 +98,7 @@ const Modal = () => {
                 CHOOSE START DATE
               </label>
               <input
+                required
                 style={{ colorScheme: "dark" }}
                 onChange={handleChange}
                 name="start"
@@ -105,6 +112,7 @@ const Modal = () => {
                 CHOOSE END DATE
               </label>
               <input
+                required
                 style={{ colorScheme: "dark" }}
                 onChange={handleChange}
                 name="end"
@@ -119,6 +127,7 @@ const Modal = () => {
               WRITE YOUR EMAIL
             </label>
             <input
+              required
               style={{ colorScheme: "dark" }}
               onChange={handleChange}
               name="user_email"
@@ -141,9 +150,10 @@ const Modal = () => {
             />
           </div>
         </div>
-        <button className="bg-gray-400 p-2 mt-4 ml-auto" type="submit">
+        <button className="bg-gray-400 p-2 mt-4 ml-auto mb-4" type="submit">
           SEND REQUEST
         </button>
+        {error && <p className="p-4 rounded bg-red-500">{error}</p>}
       </form>
     );
   }
@@ -168,8 +178,8 @@ const Modal = () => {
   }
 
   return (
-    <div className="mt-32 md:mt-44">
-      {isSubmited ? SubmittedModal() : FormModal()}
+    <div className="mt-24 md:mt-44">
+      {isSubmitted ? SubmittedModal() : FormModal()}
     </div>
   );
 };

@@ -6,9 +6,8 @@ import HeaderImageNextPrev from "./HeaderImageNextPrev";
 import { useWindowSize } from "../hooks/useWindowSize";
 
 function FullSize({
-  callToActionHrf,
+  callToActionHref,
   callToActionText,
-  srcList,
   headerText1,
   headerText2,
   textParagraph,
@@ -39,7 +38,7 @@ function FullSize({
               />
 
               <CallToActionLink
-                href={callToActionHrf}
+                href={callToActionHref}
                 text={callToActionText}
               />
             </motion.div>
@@ -48,13 +47,8 @@ function FullSize({
         <div>
           <HeaderImageNextPrev
             items={items}
-            srcList={srcList}
-            alt="image"
             prevText="&#60;/PREVIOUS"
             nextText="NEXT/&#62;"
-            prevHref="/"
-            nextHref="/"
-            imageWidth="450"
             classNameTextDiv="relative translate-y-1/2 -translate-x-24"
             header1={imageHeader1}
             header2={imageHeader2}
@@ -67,9 +61,8 @@ function FullSize({
 }
 
 function Mobile({
-  callToActionHrf,
+  callToActionHref,
   callToActionText,
-  srcList,
   headerText1,
   headerText2,
   textParagraph,
@@ -83,25 +76,34 @@ function Mobile({
       <div className="flex lg:flex-row flex-col">
         <HeaderImageNextPrev
           items={items}
-          srcList={srcList}
-          alt="image"
           prevText="&#60;/PREVIOUS"
           nextText="NEXT/&#62;"
-          prevHref="/"
-          nextHref="/"
-          imageWidth="450"
           header1={imageHeader1}
           header2={imageHeader2}
           setItem={setItem}
         />
       </div>
       <div className="mt-8 flex flex-col">
-        <HeaderAndText
-          text1={headerText1}
-          text2={headerText2}
-          text3={textParagraph}
-        />
-        <CallToActionLink href={callToActionHrf} text={callToActionText} />
+        <AnimatePresence mode="wait">
+          <motion.div
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 40 }}
+            transition={{
+              duration: 0.6,
+              easings: [0.65, 0, 0.35, 1],
+            }}
+            key={headerText1}
+          >
+            <HeaderAndText
+              text1={headerText1}
+              text2={headerText2}
+              text3={textParagraph}
+            />
+
+            <CallToActionLink href={callToActionHref} text={callToActionText} />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
