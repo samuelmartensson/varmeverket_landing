@@ -52,7 +52,7 @@ const Footer = ({ data }) => {
         }}
         className="background bg-black pointer-events-none absolute top-0 w-full bg-blue h-[125vh] z-10"
       />
-      <div className="max-w-7xl h-screen text-white md:p-8 p-6 flex flex-col justify-center m-auto">
+      <div className="max-w-7xl min-h-screen text-white md:p-8 p-6 flex flex-col justify-center m-auto">
         <p id="contact" className="md:text-xl mb-8">
           {contact}
         </p>

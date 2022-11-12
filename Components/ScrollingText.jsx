@@ -5,16 +5,14 @@ const ScrollingText = ({ text }) => {
   const { setIsOpen } = useModalContext();
 
   return (
-    <div className="max-w-full overflow-hidden font-bold text-6xl lg:text-[5vw]">
-      <div className=" relative block h-screen max-h-64 whitespace-nowrap">
-        <p onClick={() => setIsOpen(true)} className="marquee">
-          <span className="block cursor-pointer">
-            {text}_-_{text}_-_{text}_-_{text}_-_
+    <div className="font-GtAmericaExtended max-w-full font-bold">
+      <div className="inline-block relative w-screen overflow-hidden whitespace-nowrap">
+        <p onClick={() => setIsOpen(true)} className="scroll-container">
+          <span className="cursor-pointer">
+            - {text} - {text} -
           </span>
-        </p>
-        <p onClick={() => setIsOpen(true)} className="marquee marquee2">
-          <span className="block cursor-pointer">
-            {text}_-_{text}_-_{text}_-_{text}_-_
+          <span className="cursor-pointer">
+            - {text} - {text} -
           </span>
         </p>
       </div>

@@ -50,7 +50,7 @@ const Renderer = (props) => {
 
   if (component === "ScrollingText") {
     return (
-      <div className="pt-40">
+      <div className="py-20">
         <ScrollingText text={props?.text} />
       </div>
     );

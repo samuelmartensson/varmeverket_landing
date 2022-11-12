@@ -79,49 +79,49 @@ const showCase2 = {
   callToActionText: "BOOK A SPACE",
   items: [
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-TILLVERKET.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-TILLVERKET.mp4"],
       headerText1: "TILL",
       headerText2: "VERKET",
       textParagraph:
         "The space is decorated with a CNC printer, 3D printers, sewing machines and is a perfect place to work with everything from electronics to furniture and fashion, the possibilities are endless.",
     },
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-PODDVERKET-2.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-PODDVERKET-2.mp4"],
       headerText1: "PODD",
       headerText2: "VERKET",
       textParagraph:
         "The podcast studio is located by the lobby and is accessible to everyone who is a member of Värmeverket. The space is equipped with streaming equipment that will enable eSports professionals to stream directly from the podcast studio, as well as press conferences and virtual meetings.",
     },
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-M%C3%84STERVERKET.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-M%C3%84STERVERKET.mp4"],
       headerText1: "MÄSTER",
       headerText2: "VERKET",
       textParagraph:
         "Just above Underverket lies Mästerverket. Our state of the art film studio! Film is deep rooted in the history of Värmeverket since it's on the set of Torpederna our founder Leo Razzak discovered the building. The barrier to entry for film is very steep and is usually obtained through school or throughout assisting on different sets. That's why our mission is cut that time and create job opportunities to while teaching the slopes of filmmaking, while also giving filmmakers the right tools to tell their stories.",
     },
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-LJUDVERKET.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-LJUDVERKET.mp4"],
       headerText1: "LJUD",
       headerText2: "VERKET",
       textParagraph:
         "Music is a language. We speak it clearly. Through our studios, we create opportunities for local talent to be shaped and for professionals to take the step out globally.",
     },
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-KONSTVERKET.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-KONSTVERKET.mp4"],
       headerText1: "KONST",
       headerText2: "VERKET",
       textParagraph:
         "On top of Panncentralen are Konstverket. Here we will house 10 artists per year who will also hold exhibitions and decorate Värmeverket.",
     },
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-DANSVERKET.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-DANSVERKET.mp4"],
       headerText1: "DANS",
       headerText2: "VERKET",
       textParagraph:
         "Dansverket is the place where movement will be in focus with dancers, actors, theater, choreographers, acrobats. All types of performances and exhibitions will be performed here. We will offer workshops, competitions and training in dance and theater, to both new and experienced practitioners.",
     },
     {
-      srcList: ["https://hypermedia.varmeverket.com/VV-BILDVERKET.webm"],
+      srcList: ["https://hypermedia.varmeverket.com/VV-BILDVERKET.mp4"],
       headerText1: "BILD",
       headerText2: "VERKET",
       textParagraph:

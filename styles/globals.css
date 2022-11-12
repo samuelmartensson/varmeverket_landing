@@ -27,6 +27,11 @@
   src: url("../public/Fonts/GTAmerica/GTAmericaExtendedMedium.otf");
 }
 
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -110,30 +115,24 @@ h1 {
   overflow: hidden;
 }
 
-.marquee {
-  margin: 0 auto;
+.scroll-container {
   white-space: nowrap;
-  overflow: hidden;
-  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 240vw;
+  animation: scrollingText 5s linear infinite;
 }
 
-.marquee span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scrollingText 20s linear infinite;
+.scroll-container span {
+  display: block;
+  width: 120vw;
   text-decoration: underline;
-}
-
-.marquee2 span {
-  animation-delay: 10s;
+  font-size: 6.8vw;
 }
 
 @keyframes scrollingText {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-100%, 0, 0);
+  to {
+    transform: translateX(-50%);
   }
 }
 

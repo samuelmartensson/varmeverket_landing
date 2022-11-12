@@ -59,18 +59,19 @@ const Modal = () => {
     return (
       <form
         onSubmit={onSubmit}
-        className="relative flex flex-col m-auto max-w-5xl w-[90vw] mb-8 p-8 bg-gray-600 bg-opacity-80"
+        style={{ width: "clamp(300px, 90vw, 800px)" }}
+        className="relative grid m-auto mb-8 p-4 bg-gray-600 bg-opacity-80"
       >
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="font-GtAmericaExpandedBlack text-xl">BOOK A SPACE</h2>
-          <button
-            className="absolute right-4 top-4 font-GtAmericaExpandedBlack text-xs"
-            onClick={() => setIsOpen(false)}
-            type="button"
-          >
-            X
-          </button>
-        </div>
+        <button
+          className="absolute right-4 top-4 font-GtAmericaExpandedBlack text-xs"
+          onClick={() => setIsOpen(false)}
+          type="button"
+        >
+          X
+        </button>
+        <h2 className="font-GtAmericaExpandedBlack text-xl mb-8">
+          BOOK A SPACE
+        </h2>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <label className="text-white" htmlFor="space_name">
@@ -79,23 +80,25 @@ const Modal = () => {
             <select
               required
               className="w-full p-4 bg-black bg-opacity-80"
-              style={{ borderRight: "16px solid transparent" }}
               name="space_name"
               id="space_name"
               onChange={handleChange}
             >
-              <option className="hidden"></option>
               {spaces.map((item, index) => (
-                <option key={index} value={item.name}>
+                <option
+                  key={index}
+                  value={item.name}
+                  className="whitespace-normal"
+                >
                   {item.name} {item.description}
                 </option>
               ))}
             </select>
           </div>
-          <div className="flex">
-            <div className="grid gap-2 mr-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-2">
               <label className="text-white" htmlFor="start">
-                CHOOSE START DATE
+                START DATE
               </label>
               <input
                 required
@@ -107,9 +110,9 @@ const Modal = () => {
                 type="datetime-local"
               />
             </div>
-            <div className="grid gap-2 mr-4">
+            <div className="grid gap-2">
               <label className="text-white" htmlFor="end">
-                CHOOSE END DATE
+                END DATE
               </label>
               <input
                 required

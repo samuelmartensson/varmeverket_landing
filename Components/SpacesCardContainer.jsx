@@ -24,7 +24,7 @@ const data = [
   },
   {
     header: "Kv",
-    subHeader: "Kosntverket",
+    subHeader: "Konstverket",
     info: "Atelier",
   },
   {
