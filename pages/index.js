@@ -13,7 +13,7 @@ export const getServerSideProps = async (context) => {
   let sbParams = {
     version: "published",
   };
-
+  await storyblokApi.setCacheVersion("invalidated");
   let { data: sbData } = await storyblokApi.get(
     `cdn/stories/${slug}`,
     sbParams
