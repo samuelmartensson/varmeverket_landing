@@ -5,6 +5,12 @@ import "../styles/globals.css";
 storyblokInit({
   accessToken: "LT4ExTZZO2fHJZdwsVpNAAtt",
   use: [apiPlugin],
+  apiOptions: {
+    cache: {
+      clear: "auto",
+      type: "none",
+    },
+  },
 });
 
 function MyApp({ Component, pageProps }) {

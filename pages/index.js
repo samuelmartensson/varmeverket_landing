@@ -1,26 +1,19 @@
-import { useState } from "react";
 import Footer from "../Components/Footer";
-import HeroText from "../Components/HeroText";
 import NavBar from "../Components/NavBar";
-import Constilation from "../Components/Constilation";
-import ScrollingText from "../Components/ScrollingText";
 import BgSwirlVideo from "../Components/BgSwirlVideo";
-import ExplainingText from "../Components/ExplainingText";
-import SpacesCardContainer from "../Components/SpacesCardContainer";
 import Modal from "../Components/Modal";
 import { useModalContext } from "../Components/ModalContextProvider";
 import { AnimatePresence, motion } from "framer-motion";
 import { getStoryblokApi } from "@storyblok/react";
 import Renderer from "../Components/Renderer";
 
-const layoutClass = "p-6 m-auto max-w-7xl";
-
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
   const storyblokApi = getStoryblokApi();
   let slug = "home";
   let sbParams = {
     version: "published",
   };
+
   let { data: sbData } = await storyblokApi.get(
     `cdn/stories/${slug}`,
     sbParams
