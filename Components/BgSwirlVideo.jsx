@@ -7,7 +7,9 @@ const BgSwirlVideo = ({ source }) => {
 
   if (width < 1024) {
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
+        alt=""
         className="image-bg"
         src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
       />

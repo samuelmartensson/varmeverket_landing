@@ -5,8 +5,47 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const MENU_BREAKPOINT = 1024;
+const lineVariant = {
+  hidden: {
+    width: "0%",
+  },
+  visible: {
+    width: "100%",
+  },
+};
 
 let timer = null;
+
+const NavBarItem = ({ onClick, href, label }) => {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <li
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="relative whitespace-nowrap cursor-pointer"
+    >
+      <a onClick={onClick} href={href}>
+        {label}
+      </a>
+      <AnimatePresence mode="wait">
+        {hover && (
+          <motion.div
+            variants={lineVariant}
+            animate="visible"
+            exit="hidden"
+            transition={{
+              type: "tween",
+              easings: [0.65, 0.05, 0.36, 1],
+              duration: 0.6,
+            }}
+            className="h-0.5 bg-white absolute bottom-0 left-1/2 -translate-x-1/2"
+          />
+        )}
+      </AnimatePresence>
+    </li>
+  );
+};
 
 export default function NavBar({ data }) {
   const { socials, email, phoneNumber } = data;
@@ -93,6 +132,7 @@ export default function NavBar({ data }) {
     setTimeout(() => {
       requestAnimationFrame(() => {
         document.querySelector("#" + id).scrollIntoView();
+        window.location.hash = id;
       });
     }, 80);
   };
@@ -107,7 +147,16 @@ export default function NavBar({ data }) {
         options.fill ? "bg-black/90" : ""
       }`}
     >
-      <div className="p-4 lg:py-8 lg:px-12 max-w-7xl m-auto">
+      {isExpanded && (
+        <motion.img
+          alt=""
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="inset-0 fixed object-cover z-10 h-full w-full"
+          src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
+        />
+      )}
+      <div className="p-4 lg:py-8 lg:px-12 max-w-7xl m-auto relative z-20">
         <div className="flex">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -122,27 +171,23 @@ export default function NavBar({ data }) {
           />
           {size.width > MENU_BREAKPOINT ? (
             <ul className="text-lg ml-auto flex items-center justify-between gap-16">
-              <li className="whitespace-nowrap cursor-pointer">
-                <a href="https://www.varmeverket.com/sign-up">APPLY NOW</a>
-              </li>
-              <li className="whitespace-nowrap cursor-pointer">
-                <a onClick={() => handleNavigate("spaces")} href="#spaces">
-                  SPACES
-                </a>
-              </li>
-              <li className="whitespace-nowrap cursor-pointer">
-                <a
-                  onClick={() => handleNavigate("community")}
-                  href="#community"
-                >
-                  COMMUNITY
-                </a>
-              </li>
-              <li className="whitespace-nowrap cursor-pointer">
-                <a onClick={() => handleNavigate("contact")} href="#contact">
-                  CONTACT
-                </a>
-              </li>
+              <NavBarItem
+                onClick={() => handleNavigate("spaces")}
+                href="https://www.varmeverket.com/sign-up"
+                label="APPLY NOW"
+              />
+              <NavBarItem
+                onClick={() => handleNavigate("spaces")}
+                label="SPACES"
+              />
+              <NavBarItem
+                onClick={() => handleNavigate("community")}
+                label="COMMUNITY"
+              />
+              <NavBarItem
+                onClick={() => handleNavigate("contact")}
+                label="CONTACT"
+              />
             </ul>
           ) : (
             <div
@@ -162,7 +207,7 @@ export default function NavBar({ data }) {
               transition={{ duration: 0.2 }}
               className="h-full overflow-hidden"
             >
-              <div className="content text-left mt-24 mb-12">
+              <div className="relative content text-left mt-24 mb-12">
                 <ul className="font-GtAmericaExpandedBlack text-4xl ">
                   <li className="mb-8">
                     <a

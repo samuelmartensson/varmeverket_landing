@@ -59,7 +59,7 @@ const Renderer = (props) => {
   if (component === "Spaces") {
     return (
       <div className={layoutClass + " pt-20"}>
-        <SpacesCardContainer />
+        <SpacesCardContainer data={props.spaces} />
       </div>
     );
   }
