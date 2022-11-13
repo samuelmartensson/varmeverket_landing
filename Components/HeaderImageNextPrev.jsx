@@ -2,6 +2,10 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useWindowSize } from "../hooks/useWindowSize";
 
+function isProbablyImage(url) {
+  return url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
+}
+
 const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
   const containerRef = useRef();
   const size = useWindowSize();
@@ -80,18 +84,27 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
         {srcList.map((src, index) => {
           return (
             <div className="w-full h-full bg-gray-800" key={index}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <video
-                poster={src + "#t=0"}
-                ref={videoRef}
-                autoPlay
-                playsInline
-                className="w-full h-full object-cover"
-                muted
-                loop
-              >
-                <source src={src} />
-              </video>
+              {isProbablyImage(src) ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="w-full h-full object-cover"
+                    src={src}
+                    alt=""
+                  />
+                </>
+              ) : (
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover"
+                  muted
+                  loop
+                >
+                  <source src={src} />
+                </video>
+              )}
             </div>
           );
         })}
