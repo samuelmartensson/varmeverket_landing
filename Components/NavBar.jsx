@@ -68,8 +68,12 @@ export default function NavBar({ data }) {
     }
 
     setOptions((s) => {
+      if (s.lastHiddenY - y < 4) {
+        shouldHide = true;
+      }
+
       return {
-        hidden: s.lastHiddenY - y > 20,
+        hidden: shouldHide,
         fill: y > 20 || isExpanded,
         lastHiddenY: shouldHide ? y : s.lastHiddenY,
       };
