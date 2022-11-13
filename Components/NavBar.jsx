@@ -68,7 +68,7 @@ export default function NavBar({ data }) {
     }
 
     setOptions((s) => {
-      if (s.lastHiddenY - y < 4) {
+      if (s.lastHiddenY - y < 4 && y > 60) {
         shouldHide = true;
       }
 

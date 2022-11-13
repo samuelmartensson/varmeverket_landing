@@ -6,7 +6,8 @@ function isProbablyImage(url) {
   return url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
 }
 
-const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
+const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
+  const [cancelScroll, setCancelScroll] = useState(true);
   const containerRef = useRef();
   const size = useWindowSize();
   const videoRef = useRef();
@@ -63,6 +64,23 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
         style={{ height, scrollSnapType: "y mandatory" }}
         ref={containerRef}
         className="relative overflow-y-scroll z-10"
+        onTouchStart={() => {
+          setCancelScroll(true);
+        }}
+        onTouchEnd={() => {
+          setCancelScroll(false);
+          document.body.style = "";
+        }}
+        onMouseEnter={() => {
+          if (srcList.length > 1) {
+            document.body.style = "overflow: hidden";
+          }
+          setCancelScroll(true);
+        }}
+        onMouseLeave={() => {
+          document.body.style = "";
+          setCancelScroll(false);
+        }}
       >
         <div
           style={{
@@ -75,6 +93,8 @@ const VerticalScrollItem = ({ srcList, index, currentIndex, cancelScroll }) => {
         </div>
       </div>
       <motion.div
+        onViewportEnter={() => setCancelScroll(false)}
+        onViewportLeave={() => setCancelScroll(true)}
         key={index}
         className="absolute top-0 w-full h-full"
         style={{
@@ -122,7 +142,6 @@ const HeaderImageNextPrev = ({
   setItem,
   items,
 }) => {
-  const [cancelScroll, setCancelScroll] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const next = useCallback(() => {
@@ -151,30 +170,11 @@ const HeaderImageNextPrev = ({
           {header2}
         </h1>
       </div>
-      <div
-        onTouchStart={() => {
-          setCancelScroll(true);
-        }}
-        onTouchEnd={() => {
-          setCancelScroll(false);
-          document.body.style = "";
-        }}
-        onMouseEnter={() => {
-          if (items[currentIndex].srcList.length > 1) {
-            document.body.style = "overflow: hidden";
-          }
-          setCancelScroll(true);
-        }}
-        onMouseLeave={() => {
-          document.body.style = "";
-          setCancelScroll(false);
-        }}
-      >
+      <div>
         <div className="relative h-72 lg:h-96 overflow-hidden">
           {items.map((item, index) => {
             return (
               <VerticalScrollItem
-                cancelScroll={cancelScroll}
                 srcList={item.srcList}
                 key={index}
                 {...{ currentIndex, index }}
