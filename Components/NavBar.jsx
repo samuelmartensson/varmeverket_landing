@@ -6,13 +6,19 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const MENU_BREAKPOINT = 1024;
 
+let timer = null;
+
 export default function NavBar({ data }) {
   const { socials, email, phoneNumber } = data;
   const router = useRouter();
   const { setIsOpen } = useModalContext();
   const [isExpanded, setExpanded] = useState(false);
   const size = useWindowSize();
-  const [options, setOptions] = useState({ hidden: false, fill: false });
+  const [options, setOptions] = useState({
+    hidden: false,
+    lastHiddenY: 0,
+    fill: false,
+  });
   const [scrollData, setScrollData] = useState({
     x: 0,
     y: 0,
@@ -22,11 +28,26 @@ export default function NavBar({ data }) {
   const { lastY, y } = scrollData;
 
   const handleScroll = () => {
+    if (timer !== null) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(function () {
+      setOptions((s) => {
+        if (window.scrollY > s.lastHiddenY) {
+          return {
+            ...s,
+            lastHiddenY: window.scrollY,
+          };
+        }
+
+        return s;
+      });
+    }, 150);
+
     setScrollData((last) => {
       return {
-        x: window.scrollX,
         y: window.scrollY,
-        lastX: last.x,
         lastY: last.y,
       };
     });
@@ -40,14 +61,18 @@ export default function NavBar({ data }) {
 
   useEffect(() => {
     let shouldHide = false;
+
     if (y > 60 && y - lastY > 0) {
       shouldHide = true;
       setExpanded(false);
     }
 
-    setOptions({
-      hidden: shouldHide,
-      fill: y > 20 || isExpanded,
+    setOptions((s) => {
+      return {
+        hidden: s.lastHiddenY - y > 20,
+        fill: y > 20 || isExpanded,
+        lastHiddenY: shouldHide ? y : s.lastHiddenY,
+      };
     });
   }, [y, lastY, setExpanded, isExpanded]);
 
