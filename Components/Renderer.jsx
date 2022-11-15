@@ -2,6 +2,7 @@ import React from "react";
 import Constilation from "./Constilation";
 import ExplainingText from "./ExplainingText";
 import HeroText from "./HeroText";
+import LottieAnimation from "./LottieAnimation";
 import ScrollingText from "./ScrollingText";
 import SpacesCardContainer from "./SpacesCardContainer";
 
@@ -32,6 +33,10 @@ const Renderer = (props) => {
         />
       </div>
     );
+  }
+
+  if (component === "Animation") {
+    return <LottieAnimation />;
   }
 
   if (component === "Showcase") {
