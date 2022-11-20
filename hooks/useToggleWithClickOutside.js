@@ -4,7 +4,7 @@ export const useToggleWithClickOutside = (ref) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleKeydown = useCallback((event) => {
-    if (event.keyCode === 9) {
+    if (event.keyCode === 27) {
       setIsOpen(false);
       return;
     }

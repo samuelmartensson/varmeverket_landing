@@ -23,6 +23,9 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       components: sbData.story.content.body,
+      modalData: sbData.story.content.body.find(
+        (item) => item.component === "Modal"
+      ),
       navbarData: sbData.story.content.body.find(
         (item) => item.component === "Navbar"
       ),
@@ -34,12 +37,17 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-export default function Home({ navbarData, footerData, components }) {
+export default function Home({
+  navbarData,
+  modalData,
+  footerData,
+  components,
+}) {
   return (
     <>
       <BgSwirlVideo source="https://hypermedia.varmeverket.com/73_at_24s.mp4" />
       <NavBar data={navbarData} />
-      <Modal />
+      <Modal data={modalData} />
       <main>
         {components.map((item) => (
           <Renderer key={item._uid} {...item} />

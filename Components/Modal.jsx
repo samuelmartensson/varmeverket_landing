@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { useToggleWithClickOutside } from "../hooks/useToggleWithClickOutside";
 import { useModalContext } from "./ModalContextProvider";
 
-const Modal = () => {
+const Modal = ({ data }) => {
+  const { title, paragraph } = data;
   const node = useRef();
   const [spaces, setSpaces] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -93,7 +94,9 @@ const Modal = () => {
               name="space_name"
               id="space_name"
               onChange={handleChange}
+              defaultValue={spaces?.[0] || ""}
             >
+              <option value="" style={{ display: "none" }} />
               {spaces.map((item, index) => (
                 <option
                   key={index}
@@ -173,19 +176,19 @@ const Modal = () => {
 
   function SubmittedModal() {
     return (
-      <div className="relative flex flex-col m-auto max-w-5xl w-[90vw] mb-8 p-8 bg-gray-600 bg-opacity-80">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="font-GtAmericaExpandedBlack text-xl">
-            THANKS FOR BOOKING
-          </h2>
-          <button
-            className="absolute right-4 top-4 font-GtAmericaExpandedBlack text-xl"
-            onClick={() => setIsOpen(false)}
-            type="button"
-          >
-            X
-          </button>
-        </div>
+      <div
+        style={{ width: "clamp(300px, 90vw, 800px)" }}
+        className="relative flex flex-col mb-8 p-8 bg-gray-600 bg-opacity-80"
+      >
+        <button
+          className="absolute right-4 top-4 font-GtAmericaExpandedBlack text-xs"
+          onClick={() => setIsOpen(false)}
+          type="button"
+        >
+          X
+        </button>
+        <h2 className="font-GtAmericaExpandedBlack text-xl mb-8">{title}</h2>
+        <p>{paragraph}</p>
       </div>
     );
   }
