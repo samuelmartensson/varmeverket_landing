@@ -119,15 +119,15 @@ h1 {
   white-space: nowrap;
   display: flex;
   flex-wrap: nowrap;
-  width: 240vw;
+  width: 200vw;
   animation: scrollingText 5s linear infinite;
 }
 
 .scroll-container span {
   display: block;
-  width: 120vw;
   text-decoration: underline;
   font-size: 6.8vw;
+  width: 100vw;
 }
 
 @keyframes scrollingText {

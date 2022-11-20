@@ -1,8 +1,10 @@
-import { Result } from "postcss";
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { useToggleWithClickOutside } from "../hooks/useToggleWithClickOutside";
 import { useModalContext } from "./ModalContextProvider";
 
 const Modal = () => {
+  const node = useRef();
   const [spaces, setSpaces] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -13,22 +15,30 @@ const Modal = () => {
     user_email: "",
     additionalInfo: "",
   });
+  const { isOpen: isLocalOpen, toggle } = useToggleWithClickOutside(node);
+  const { setIsOpen, isOpen } = useModalContext();
 
   useEffect(() => {
     getSpaces();
-    window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    toggle(isOpen);
+  }, [isOpen, toggle]);
+
+  useEffect(() => {
+    if (!isLocalOpen) {
+      setIsOpen(false);
+    }
+  }, [isLocalOpen, setIsOpen]);
 
   async function getSpaces() {
     await fetch("https://api.varmeverket.com/v2/spaces", { method: "GET" })
       .then((response) => response.json())
       .then((data) => {
         setSpaces(data);
-        return data;
       });
   }
-
-  const { setIsOpen } = useModalContext();
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -60,7 +70,7 @@ const Modal = () => {
       <form
         onSubmit={onSubmit}
         style={{ width: "clamp(300px, 90vw, 800px)" }}
-        className="relative grid m-auto mb-8 p-4 bg-gray-600 bg-opacity-80"
+        className="relative grid m-auto p-4 bg-gray-600 bg-opacity-80"
       >
         <button
           className="absolute right-4 top-4 font-GtAmericaExpandedBlack text-xs"
@@ -181,9 +191,21 @@ const Modal = () => {
   }
 
   return (
-    <div className="mt-24 md:mt-44">
-      {isSubmitted ? SubmittedModal() : FormModal()}
-    </div>
+    <AnimatePresence mode="wait">
+      {isOpen && (
+        <motion.div
+          transition={{ duration: 0.2 }}
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -40 }}
+          className="grid place-items-center fixed inset-0 z-40 bg-black/50"
+        >
+          <div ref={node} className="h-[70vh] overflow-auto">
+            {isSubmitted ? SubmittedModal() : FormModal()}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

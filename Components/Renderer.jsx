@@ -1,12 +1,14 @@
+import { data } from "autoprefixer";
 import React from "react";
 import Constilation from "./Constilation";
 import ExplainingText from "./ExplainingText";
 import HeroText from "./HeroText";
 import LottieAnimation from "./LottieAnimation";
+import NoSSR from "./NoSSR";
 import ScrollingText from "./ScrollingText";
-import SpacesCardContainer from "./SpacesCardContainer";
+import Spaces from "./Spaces";
 
-const layoutClass = "p-6 m-auto max-w-7xl z-40 relative";
+const layoutClass = "p-6 m-auto max-w-7xl z-30 relative";
 
 const Renderer = (props) => {
   const { component } = props;
@@ -36,7 +38,15 @@ const Renderer = (props) => {
   }
 
   if (component === "Animation") {
-    return <LottieAnimation />;
+    return (
+      <LottieAnimation
+        title={{
+          thin: props?.title_row1,
+          thin2: props?.title_row2_thin,
+          bold: props?.title_row2_bold,
+        }}
+      />
+    );
   }
 
   if (component === "Showcase") {
@@ -56,7 +66,9 @@ const Renderer = (props) => {
   if (component === "ScrollingText") {
     return (
       <div className="py-20">
-        <ScrollingText text={props?.text} />
+        <NoSSR>
+          <ScrollingText text={props?.text} />
+        </NoSSR>
       </div>
     );
   }
@@ -64,7 +76,10 @@ const Renderer = (props) => {
   if (component === "Spaces") {
     return (
       <div className={layoutClass + " pt-20"}>
-        <SpacesCardContainer data={props.spaces} />
+        <Spaces
+          data={props?.spaces}
+          title={{ thin: props?.title_row1, bold: props?.title_row2 }}
+        />
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { useModalContext } from "./ModalContextProvider";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import NoSSR from "./NoSSR";
 
 const MENU_BREAKPOINT = 1024;
 const lineVariant = {
@@ -128,146 +129,142 @@ export default function NavBar({ data }) {
   const handleNavigate = (id) => {
     setIsOpen(false);
     setExpanded(false);
-
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        document.querySelector("#" + id).scrollIntoView();
-        window.location.hash = id;
-      });
-    }, 80);
+    window.location.hash = id;
   };
 
   return (
-    <div
-      style={{
-        height: isExpanded ? "100%" : "unset",
-        transform: options.hidden ? "translateY(-100%)" : "translateY(0%)",
-      }}
-      className={`fixed top-0 left-0 right-0 duration-300 z-50 ${
-        options.fill ? "bg-black/90" : ""
-      }`}
-    >
-      {isExpanded && (
-        <motion.img
-          alt=""
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="inset-0 fixed object-cover z-10 h-full w-full"
-          src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
-        />
-      )}
-      <div className="p-4 lg:py-8 lg:px-12 max-w-7xl m-auto relative z-20">
-        <div className="flex">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            onClick={() => {
-              router.push("/");
-              setExpanded(false);
-              setIsOpen(false);
-            }}
-            className="cursor-pointer sm:h-20 md:h-15 lg:h-15 xl:h-20 2xl:h-20 h-14"
-            src="https://hypermedia.varmeverket.com/logo.svg"
-            alt="värmeverket"
+    <NoSSR>
+      <div
+        style={{
+          height: isExpanded ? "100%" : "unset",
+          transform: options.hidden ? "translateY(-100%)" : "translateY(0%)",
+        }}
+        className={`fixed top-0 left-0 right-0 duration-300 z-50 ${
+          options.fill ? "bg-black/90" : ""
+        }`}
+      >
+        {isExpanded && (
+          <motion.img
+            alt=""
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="inset-0 fixed object-cover z-10 h-full w-full"
+            src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
           />
-          {size.width > MENU_BREAKPOINT ? (
-            <ul className="text-lg ml-auto flex items-center justify-between gap-16">
-              <NavBarItem
-                onClick={() => handleNavigate("spaces")}
-                href="https://www.varmeverket.com/sign-up"
-                label="APPLY NOW"
-              />
-              <NavBarItem
-                onClick={() => handleNavigate("spaces")}
-                label="SPACES"
-              />
-              <NavBarItem
-                onClick={() => handleNavigate("community")}
-                label="COMMUNITY"
-              />
-              <NavBarItem
-                onClick={() => handleNavigate("contact")}
-                label="CONTACT"
-              />
-            </ul>
-          ) : (
-            <div
-              className="header ml-auto underline text-xl place-self-end self-center"
-              onClick={() => setExpanded((s) => !s)}
-            >
-              {isExpanded ? "CLOSE" : "MENU"}
-            </div>
-          )}
-        </div>
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              initial={{ height: 0 }}
-              animate={{ height: "auto" }}
-              exit={{ height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="h-full overflow-hidden"
-            >
-              <div className="relative content text-left mt-24 mb-12">
-                <ul className="font-GtAmericaExpandedBlack text-4xl ">
-                  <li className="mb-8">
-                    <a
-                      className="cursor-pointer hover:underline"
-                      href="https://www.varmeverket.com/sign-up"
-                    >
-                      APPLY
-                    </a>
-                  </li>
-                  <li className="mb-8">
-                    <a
-                      className="cursor-pointer hover:underline"
-                      onClick={() => handleNavigate("community")}
-                      href="#community"
-                    >
-                      COMMUNITY
-                    </a>
-                  </li>
-                  <li className="mb-8">
-                    <a
-                      className="cursor-pointer hover:underline"
-                      onClick={() => handleNavigate("spaces")}
-                      href="#spaces"
-                    >
-                      SPACES
-                    </a>
-                  </li>
-                  <li className="mb-8">
-                    <a
-                      className="cursor-pointer hover:underline"
-                      onClick={() => handleNavigate("contact")}
-                      href="#contact"
-                    >
-                      CONTACT
-                    </a>
-                  </li>
-                </ul>
-                <div>
-                  <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
-                  <br />
-                  <a href={`mailto: ${email}`}>{email}</a>
+        )}
+        <div className="p-4 lg:py-6 lg:px-12 max-w-7xl m-auto relative z-20">
+          <div className="flex">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              onClick={() => {
+                router.push("/");
+                setExpanded(false);
+                setIsOpen(false);
+              }}
+              className="cursor-pointer md:h-20 h-14"
+              src="https://hypermedia.varmeverket.com/logo.svg"
+              alt="värmeverket"
+            />
+            {size.width > MENU_BREAKPOINT ? (
+              <ul className="text-lg ml-auto flex items-center justify-between gap-16">
+                <NavBarItem
+                  onClick={() => handleNavigate("spaces")}
+                  href="https://www.varmeverket.com/sign-up"
+                  label="APPLY NOW"
+                />
+                <NavBarItem
+                  onClick={() => handleNavigate("spaces")}
+                  label="SPACES"
+                />
+                <NavBarItem
+                  onClick={() => handleNavigate("community")}
+                  label="COMMUNITY"
+                />
+                <NavBarItem
+                  onClick={() => handleNavigate("contact")}
+                  label="CONTACT"
+                />
+              </ul>
+            ) : (
+              <div
+                className="header ml-auto underline text-xl place-self-end self-center"
+                onClick={() => setExpanded((s) => !s)}
+              >
+                {isExpanded ? "CLOSE" : "MENU"}
+              </div>
+            )}
+          </div>
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ height: 0 }}
+                animate={{ height: "auto" }}
+                exit={{ height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="h-full overflow-hidden"
+              >
+                <div className="relative content text-left mt-24 mb-12">
+                  <ul className="font-GtAmericaExpandedBlack text-4xl ">
+                    <li className="mb-8">
+                      <a
+                        className="cursor-pointer hover:underline"
+                        href="https://www.varmeverket.com/sign-up"
+                      >
+                        APPLY
+                      </a>
+                    </li>
+                    <li className="mb-8">
+                      <a
+                        className="cursor-pointer hover:underline"
+                        onClick={() => handleNavigate("community")}
+                        href="#community"
+                      >
+                        COMMUNITY
+                      </a>
+                    </li>
+                    <li className="mb-8">
+                      <a
+                        className="cursor-pointer hover:underline"
+                        onClick={() => handleNavigate("spaces")}
+                        href="#spaces"
+                      >
+                        SPACES
+                      </a>
+                    </li>
+                    <li className="mb-8">
+                      <a
+                        className="cursor-pointer hover:underline"
+                        onClick={() => handleNavigate("contact")}
+                        href="#contact"
+                      >
+                        CONTACT
+                      </a>
+                    </li>
+                  </ul>
+                  <div>
+                    <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
+                    <br />
+                    <a href={`mailto: ${email}`}>{email}</a>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-wrap gap-4 underline text-sm">
-                {socials.map((item) => (
-                  <a
-                    key={item.text}
-                    className="block"
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {item.text}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                <div className="flex flex-wrap gap-4 underline text-sm">
+                  {socials.map((item) => (
+                    <a
+                      key={item.text}
+                      className="block"
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {item.text}
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </NoSSR>
   );
 }

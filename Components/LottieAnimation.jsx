@@ -3,12 +3,12 @@ import { useLottie, useLottieInteractivity } from "lottie-react";
 import { useRef } from "react";
 import animation from "../public/Images/varmeverket_lottie.json";
 
-const LottieAnimation = () => {
+const LottieAnimation = ({ title }) => {
   const lottieObj = useLottie({
     animationData: animation,
     style: {
       width: "90vw",
-      maxWidth: 1280,
+      maxWidth: 1100,
       margin: "auto",
     },
   });
@@ -57,11 +57,11 @@ const LottieAnimation = () => {
           }}
         />
         <div className="relative z-10 max-w-7xl w-full px-6 m-auto">
-          <h1 className="mb-20 text-3xl lg:text-6xl">
-            <div className="leading-tight">THIS.IS.</div>
+          <h1 className="mb-32 md:mb-40 text-3xl lg:text-6xl">
+            <div className="leading-tight">{title?.thin}</div>
             <div>
-              <span className="font-normal leading-tight">VÄRME</span>
-              <span className="font-bold leading-tight">VERKET.</span>
+              <span className="font-normal leading-tight">{title?.thin2}</span>
+              <span className="font-bold leading-tight">{title?.bold}</span>
             </div>
           </h1>
           {Animation}
