@@ -52,6 +52,7 @@ export default function NavBar({ data }) {
   const { socials, email, phoneNumber } = data;
   const router = useRouter();
   const { setIsOpen } = useModalContext();
+  const [isHover, setIsHover] = useState(false);
   const [isExpanded, setExpanded] = useState(false);
   const size = useWindowSize();
   const [options, setOptions] = useState({
@@ -152,17 +153,20 @@ export default function NavBar({ data }) {
             src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
           />
         )}
-        <div className="p-4 lg:py-6 lg:px-12 max-w-7xl m-auto relative z-20">
+        <div className="p-6 lg:py-6 lg:px-12 max-w-7xl m-auto relative z-20">
           <div className="flex">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              onMouseEnter={() => setIsHover(true)}
+              onMouseLeave={() => setIsHover(false)}
               onClick={() => {
                 router.push("/");
                 setExpanded(false);
                 setIsOpen(false);
               }}
-              className="cursor-pointer md:h-20 h-14"
-              src="https://hypermedia.varmeverket.com/logo.svg"
+              style={{ filter: "invert(1)" }}
+              className="cursor-pointer md:h-16 h-10"
+              src={isHover ? "/Images/logo.gif" : "/Images/logo-freeze.gif"}
               alt="värmeverket"
             />
             {size.width > MENU_BREAKPOINT ? (
