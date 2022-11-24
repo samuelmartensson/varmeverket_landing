@@ -153,7 +153,7 @@ export default function NavBar({ data }) {
             src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
           />
         )}
-        <div className="p-6 lg:py-6 lg:px-12 max-w-7xl m-auto relative z-20">
+        <div className="p-6 max-w-7xl m-auto relative z-20">
           <div className="flex">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
