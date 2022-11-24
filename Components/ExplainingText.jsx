@@ -35,7 +35,7 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
               <div key={index} className="relative">
                 <div
                   style={{
-                    maxWidth: Math.max(scrollY - 400 * index, 0),
+                    maxWidth: Math.max(scrollY - 200 * index, 0),
                     transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
                   }}
                   className={textClassAbs}
@@ -47,9 +47,21 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
             ))}
           </h1>
           {prompt && (
-            <h1 className="xl:text-6xl md:text-4xl text-xl lg:text-center md:mt-20 mt-12">
-              {prompt.left}
-              <span className="font-bold">{prompt.right}</span>
+            <h1 className="xl:text-6xl md:text-4xl text-xl lg:text-center md:mt-20 mt-12 relative">
+              <div
+                style={{
+                  maxWidth: Math.max(scrollY - 200 * rows.length, 0),
+                  transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+                className={textClassAbs}
+              >
+                {prompt.left}
+                <span className="font-bold">{prompt.right}</span>
+              </div>
+              <div className={textClass}>
+                {prompt.left}
+                <span className="font-bold">{prompt.right}</span>
+              </div>
             </h1>
           )}
           <div className="flex justify-center">

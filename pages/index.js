@@ -4,6 +4,17 @@ import BgSwirlVideo from "../Components/BgSwirlVideo";
 import Modal from "../Components/Modal";
 import { getStoryblokApi } from "@storyblok/react";
 import Renderer from "../Components/Renderer";
+import { motion } from "framer-motion";
+const fadeVariant = {
+  hidden: {
+    y: 40,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 export const getServerSideProps = async (context) => {
   const storyblokApi = getStoryblokApi();
@@ -50,7 +61,19 @@ export default function Home({
       <Modal data={modalData} />
       <main>
         {components.map((item) => (
-          <Renderer key={item._uid} {...item} />
+          <motion.div
+            key={item._uid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-200px 0px -200px 0px" }}
+            variants={fadeVariant}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+          >
+            <Renderer key={item._uid} {...item} />
+          </motion.div>
         ))}
       </main>
       <Footer data={footerData} />

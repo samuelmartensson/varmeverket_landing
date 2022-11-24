@@ -17,7 +17,15 @@ const BgSwirlVideo = ({ source }) => {
   }
 
   return (
-    <video ref={ref} className="video-bg" autoPlay muted loop id="video">
+    <video
+      ref={ref}
+      className="video-bg"
+      poster="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
+      autoPlay
+      muted
+      loop
+      id="video"
+    >
       <source src={source} type="video/mp4" />
     </video>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useModalContext } from "./ModalContextProvider";
 
 const boxVariant = {
@@ -39,7 +39,7 @@ const CallToActionLink = ({ href, text = "" }) => {
   return (
     <div className="inline-block mt-5 md:mt-10">
       <a
-        className="cursor-pointer font-bold sm:text-2xl xl:text-5xl text-2xl"
+        className="cursor-pointer font-bold text-2xl lg:text-5xl "
         onClick={() => setIsOpen(true)}
       >
         <motion.div

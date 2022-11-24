@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import React from "react";
 import Constilation from "./Constilation";
 import ExplainingText from "./ExplainingText";
@@ -7,6 +6,7 @@ import LottieAnimation from "./LottieAnimation";
 import NoSSR from "./NoSSR";
 import ScrollingText from "./ScrollingText";
 import Spaces from "./Spaces";
+import { motion } from "framer-motion";
 
 const layoutClass = "p-6 m-auto max-w-7xl z-30 relative";
 
@@ -65,7 +65,7 @@ const Renderer = (props) => {
 
   if (component === "ScrollingText") {
     return (
-      <div className="py-20">
+      <div className="py-[15vh] overflow-x-hidden">
         <NoSSR>
           <ScrollingText text={props?.text} />
         </NoSSR>

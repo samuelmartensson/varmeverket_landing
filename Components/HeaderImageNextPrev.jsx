@@ -162,14 +162,14 @@ const HeaderImageNextPrev = ({
 
   return (
     <>
-      <div className={classNameTextDiv + " mb-4 z-10"}>
-        <h1 className="text-3xl lg:text-5xl font-GTAmericaExpandedRegular">
+      <h2 className={classNameTextDiv + " z-10"}>
+        <div className="text-3xl lg:text-5xl font-GTAmericaExpandedRegular">
           {header1}
-        </h1>
-        <h1 className="text-3xl lg:text-5xl font-semibold font-GtAmericaExpandedBlack">
+        </div>
+        <div className="text-3xl lg:text-5xl font-semibold font-GtAmericaExpandedBlack">
           {header2}
-        </h1>
-      </div>
+        </div>
+      </h2>
       <div>
         <div className="relative h-72 lg:h-96 overflow-hidden">
           {items.map((item, index) => {

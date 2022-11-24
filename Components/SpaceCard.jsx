@@ -1,16 +1,48 @@
-import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
 
-const SpaceCard = ({ number, header, subHeader, info }) => {
+const SpaceCard = ({ number, header, subHeader, info, capacity, area }) => {
+  const [isHover, setIsHover] = useState(false);
   return (
     <div
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      onTouchEnd={() => setIsHover((s) => !s)}
       style={{ aspectRatio: "9 / 11" }}
-      className="p-4 relative w-full h-full spaceCardAnimation border border-white/60 grid place-items-center cursor-pointer"
+      className="py-4 px-6 relative w-full h-full spaceCardAnimation border border-white/70 grid place-items-center cursor-pointer"
     >
-      <span className="text-xs absolute top-2 left-2 ">{number}</span>
+      <span className="text-xs absolute top-2 left-2">{number}</span>
       <div className="text-center mt-4">
-        <h2 className="md:text-6xl text-5xl font-semibold">{header}</h2>
-        <p className="text-md md:text-xl mt-2">{subHeader}</p>
-        <p className="text-xs md:text-base font-thin md:mt-4 mt-2">{info}</p>
+        <AnimatePresence mode="wait">
+          {isHover ? (
+            <motion.div
+              key="1"
+              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-8"
+            >
+              <h2 className="text-md sm:text-2xl">{capacity}</h2>
+              <p className="text-md sm:text-2xl mt-2">{area}</p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="2"
+              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-8"
+            >
+              <h2 className="md:text-6xl text-5xl font-bold">{header}</h2>
+              <p className="text-md md:text-xl mt-2">{subHeader}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <p className="text-xs md:text-base absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap">
+          {info}
+        </p>
       </div>
     </div>
   );

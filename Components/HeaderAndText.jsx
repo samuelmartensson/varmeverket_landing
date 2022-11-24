@@ -3,7 +3,7 @@ import React from "react";
 const HeaderAndText = ({ text1, text2, text3 }) => {
   return (
     <>
-      <div className="text-4xl mb-4 font-GtAmericaCompressed">
+      <div className="lg:text-6xl text-4xl mb-4 font-GtAmericaCompressed">
         <span className="font-thin">{text1}</span>
         <span className="font-bold">{text2}</span>
       </div>
