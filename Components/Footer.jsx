@@ -86,13 +86,13 @@ const Footer = ({ data }) => {
                     href={tosHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="underline"
+                    className="underline text-xl"
                   >
                     {tosText}
                   </a>
                 </div>
                 <div>
-                  <p className="text-2xl mb-8">{socialsHeader}</p>
+                  <p className="text-2xl mb-4">{socialsHeader}</p>
                   <div className="underline text-xl">
                     {socials.map((item) => (
                       <a
