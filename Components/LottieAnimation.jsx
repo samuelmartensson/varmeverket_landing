@@ -44,13 +44,13 @@ const LottieAnimation = ({ title }) => {
     <>
       <div
         ref={ref}
-        className="relative w-full min-h-[75vh] grid grid-cols-1 justify-center py-24"
+        className="relative w-full grid grid-cols-1 justify-center py-24"
       >
         <motion.div
           className="absolute w-full"
           style={{
-            top: "-65%",
-            height: "200vh",
+            top: "-100%",
+            height: "300vh",
             opacity: scrollFade,
             background:
               "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 80%, rgba(255,255,255,0) 100%)",

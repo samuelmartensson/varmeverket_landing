@@ -16,26 +16,26 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
 
   const scroll = useSpring(scrollYProgress, {
     stiffness: 100,
-    damping: 30,
+    damping: 40,
     restDelta: 0.001,
   });
 
   useEffect(() => {
     return scroll.onChange((latest) => {
-      setScrollY(latest * 2500);
+      setScrollY(latest * 210);
     });
   }, [scroll]);
 
   return (
     <div ref={containerRef} className="flex justify-center">
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center">
         <div className="font-GtAmerica">
           <h1 className="xl:text-6xl md:text-4xl text-2xl">
             {rows?.map((row, index) => (
               <div key={index} className="relative">
                 <div
                   style={{
-                    maxWidth: Math.max(scrollY - 200 * index, 0),
+                    maxWidth: Math.max(scrollY - 15 * index, 0) + "%",
                     transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
                   }}
                   className={textClassAbs}
@@ -50,7 +50,7 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
             <h1 className="xl:text-6xl md:text-4xl text-xl lg:text-center md:mt-20 mt-12 relative">
               <div
                 style={{
-                  maxWidth: Math.max(scrollY - 200 * rows.length, 0),
+                  maxWidth: Math.max(scrollY - 15 * rows.length, 0) + "%",
                   transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
                 }}
                 className={textClassAbs}

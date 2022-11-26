@@ -7,6 +7,7 @@ function isProbablyImage(url) {
 }
 
 const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
+  const [isMuted, setIsMuted] = useState(true);
   const [cancelScroll, setCancelScroll] = useState(true);
   const containerRef = useRef();
   const size = useWindowSize();
@@ -40,12 +41,17 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
   }, [scrollY, height, cancelScroll, srcList.length, currentIndex, index]);
 
   useEffect(() => {
-    if (videoRef.current) {
+    const video = videoRef.current;
+    if (video) {
       if (index === currentIndex) {
-        videoRef.current.currentTime = 0;
-        videoRef.current?.play();
+        video.currentTime = 0;
+        video.play();
+        video.muted = false;
+        setIsMuted(false);
       } else {
-        videoRef.current?.pause();
+        video.pause();
+        video.muted = true;
+        setIsMuted(true);
       }
     }
   }, [index, currentIndex]);
@@ -64,6 +70,15 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
         style={{ height, scrollSnapType: "y mandatory" }}
         ref={containerRef}
         className="relative overflow-y-scroll z-10"
+        onClick={() => {
+          const video = videoRef.current;
+          if (video?.paused) {
+            video.play();
+          } else if (video) {
+            video.muted = !video.muted;
+            setIsMuted(video.muted);
+          }
+        }}
         onTouchStart={() => {
           setCancelScroll(true);
         }}
@@ -93,14 +108,33 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
         </div>
       </div>
       <motion.div
-        onViewportEnter={() => setCancelScroll(false)}
-        onViewportLeave={() => setCancelScroll(true)}
+        onViewportEnter={() => {
+          if (videoRef.current && index === currentIndex) {
+            videoRef.current.play();
+            videoRef.current.muted = false;
+            setIsMuted(false);
+          }
+          setCancelScroll(false);
+        }}
+        onViewportLeave={() => {
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.pause();
+          }
+          setCancelScroll(true);
+        }}
         key={index}
         className="absolute top-0 w-full h-full"
         style={{
           y: spring,
         }}
       >
+        {videoRef.current && (
+          <div className="absolute left-2 bottom-1 text-xs">
+            Sound: {!isMuted ? "on" : "off"}
+          </div>
+        )}
         {srcList.map((src, index) => {
           return (
             <div className="w-full h-full bg-gray-800" key={index}>
@@ -116,7 +150,6 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
               ) : (
                 <video
                   ref={videoRef}
-                  autoPlay
                   playsInline
                   className="w-full h-full object-cover"
                   muted

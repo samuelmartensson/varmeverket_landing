@@ -3,7 +3,7 @@ import SpaceCard from "./SpaceCard";
 
 const Spaces = ({ data, title }) => {
   return (
-    <>
+    <div>
       <div
         id="spaces"
         className="flex flex-col mb-10 scroll-mt-20 text-3xl lg:text-6xl"
@@ -20,7 +20,7 @@ const Spaces = ({ data, title }) => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

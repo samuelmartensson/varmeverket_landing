@@ -17,7 +17,7 @@ function FullSize({
   items,
 }) {
   return (
-    <div className="mt-20">
+    <div className="grid items-center">
       <div className="grid grid-cols-2">
         <div className="mt-28">
           <AnimatePresence mode="wait">

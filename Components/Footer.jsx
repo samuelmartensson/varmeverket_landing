@@ -22,8 +22,8 @@ const Footer = ({ data }) => {
   const { scrollYProgress } = useScroll();
   const { scrollYProgress: scrollYFade } = useScroll();
 
-  const transform = useTransform(scrollYProgress, [0.9, 0.95], [0, 100]);
-  const transformFade = useTransform(scrollYFade, [0.9, 0.95], [0, 1]);
+  const transform = useTransform(scrollYProgress, [0.925, 0.95], [0, 100]);
+  const transformFade = useTransform(scrollYFade, [0.875, 0.925], [0, 1]);
 
   const scroll = useSpring(transform, {
     stiffness: 100,
@@ -42,7 +42,7 @@ const Footer = ({ data }) => {
   return (
     <footer
       style={{ filter: `invert(${scrollY}%)` }}
-      className="bg-black relative mt-40"
+      className="bg-black relative mt-[50vh]"
     >
       <motion.div
         style={{

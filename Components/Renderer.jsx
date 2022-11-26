@@ -6,9 +6,9 @@ import LottieAnimation from "./LottieAnimation";
 import NoSSR from "./NoSSR";
 import ScrollingText from "./ScrollingText";
 import Spaces from "./Spaces";
-import { motion } from "framer-motion";
 
-const layoutClass = "p-6 m-auto max-w-7xl z-30 relative";
+const layoutClass =
+  "min-h-[65vh] mb-40 grid items-center p-6 m-auto max-w-7xl z-30 relative";
 
 const Renderer = (props) => {
   const { component } = props;
@@ -27,7 +27,7 @@ const Renderer = (props) => {
 
   if (component === "ExplainingText") {
     return (
-      <div className={layoutClass + " mb-40"}>
+      <div className={layoutClass}>
         <ExplainingText
           rows={props?.rows}
           prompt={{ left: props?.left, right: props?.right }}
@@ -39,19 +39,21 @@ const Renderer = (props) => {
 
   if (component === "Animation") {
     return (
-      <LottieAnimation
-        title={{
-          thin: props?.title_row1,
-          thin2: props?.title_row2_thin,
-          bold: props?.title_row2_bold,
-        }}
-      />
+      <div className="min-h-screen">
+        <LottieAnimation
+          title={{
+            thin: props?.title_row1,
+            thin2: props?.title_row2_thin,
+            bold: props?.title_row2_bold,
+          }}
+        />
+      </div>
     );
   }
 
   if (component === "Showcase") {
     return (
-      <div id={props?.scrollId} className={layoutClass + " mb-20"}>
+      <div id={props?.scrollId} className={layoutClass}>
         <Constilation
           imageHeader1={props?.headerThin}
           imageHeader2={props?.headerThick}
@@ -65,7 +67,7 @@ const Renderer = (props) => {
 
   if (component === "ScrollingText") {
     return (
-      <div className="py-[15vh] overflow-x-hidden">
+      <div className="py-[20vh] overflow-x-hidden">
         <NoSSR>
           <ScrollingText text={props?.text} />
         </NoSSR>
@@ -75,7 +77,7 @@ const Renderer = (props) => {
 
   if (component === "Spaces") {
     return (
-      <div className={layoutClass + " pt-20"}>
+      <div className={layoutClass}>
         <Spaces
           data={props?.spaces}
           title={{ thin: props?.title_row1, bold: props?.title_row2 }}
