@@ -30,7 +30,7 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
     <div ref={containerRef} className="flex justify-center">
       <div className="flex justify-center items-center">
         <div className="font-GtAmerica">
-          <h1 className="xl:text-6xl md:text-4xl text-2xl">
+          <h1 className="xl:text-6xl md:text-4xl text-xl">
             {rows?.map((row, index) => (
               <div key={index} className="relative">
                 <div

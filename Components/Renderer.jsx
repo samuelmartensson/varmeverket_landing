@@ -8,7 +8,7 @@ import ScrollingText from "./ScrollingText";
 import Spaces from "./Spaces";
 
 const layoutClass =
-  "min-h-[65vh] mb-40 grid items-center p-6 m-auto max-w-7xl z-30 relative";
+  "min-h-[65vh] grid items-center p-6 m-auto max-w-7xl z-30 relative";
 
 const Renderer = (props) => {
   const { component } = props;

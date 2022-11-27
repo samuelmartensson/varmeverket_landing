@@ -79,7 +79,7 @@ const Footer = ({ data }) => {
                   </p>
                 ))}
               </div>
-              <div className="grid grid-cols-2">
+              <div className="grid gap-4 grid-cols-2">
                 <div>
                   <p className="mb-4 text-2xl">{policyHeader}</p>
                   <a

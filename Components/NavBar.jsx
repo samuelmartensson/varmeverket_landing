@@ -101,11 +101,11 @@ export default function NavBar({ data }) {
   }, []);
 
   useEffect(() => {
+    if (isExpanded) return;
     let shouldHide = false;
 
     if (y > 60 && y - lastY > 0) {
       shouldHide = true;
-      setExpanded(false);
     }
 
     setOptions((s) => {
@@ -115,7 +115,7 @@ export default function NavBar({ data }) {
 
       return {
         hidden: shouldHide,
-        fill: y > 20 || isExpanded,
+        fill: y > 20,
         lastHiddenY: shouldHide ? y : s.lastHiddenY,
       };
     });
@@ -153,7 +153,7 @@ export default function NavBar({ data }) {
             src="https://a.storyblok.com/f/183192/1181x1161/55ce2d7686/vv-bg.jpg"
           />
         )}
-        <div className="p-6 max-w-7xl m-auto relative z-20">
+        <div className="p-6 max-w-7xl m-auto relative z-20 overflow-auto max-h-screen">
           <div className="flex">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -205,9 +205,9 @@ export default function NavBar({ data }) {
                 animate={{ height: "auto" }}
                 exit={{ height: 0 }}
                 transition={{ duration: 0.2 }}
-                className="h-full overflow-hidden"
+                className="h-full"
               >
-                <div className="relative content text-left mt-24 mb-12">
+                <div className="relative text-left mt-24 mb-12">
                   <ul className="font-GtAmericaExpandedBlack text-4xl ">
                     <li className="mb-8">
                       <a

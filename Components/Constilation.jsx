@@ -122,7 +122,7 @@ export default function Constilation(props) {
   }));
 
   return (
-    <>
+    <div className="pb-[15vh]">
       {size.width > 1000 ? (
         <FullSize
           {...props}
@@ -138,6 +138,6 @@ export default function Constilation(props) {
           items={parsedItems}
         />
       )}
-    </>
+    </div>
   );
 }

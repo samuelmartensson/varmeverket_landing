@@ -17,6 +17,10 @@ export const getServerSideProps = async (context) => {
     sbParams
   );
 
+  const componentMap = Object.fromEntries(
+    sbData.story.content.body.map((item) => [item.component, item])
+  );
+
   const footerData = sbData.story.content.body.find(
     (item) => item.component === "Footer"
   );
@@ -24,12 +28,8 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       components: sbData.story.content.body,
-      modalData: sbData.story.content.body.find(
-        (item) => item.component === "Modal"
-      ),
-      navbarData: sbData.story.content.body.find(
-        (item) => item.component === "Navbar"
-      ),
+      modalData: componentMap["Modal"],
+      navbarData: componentMap["Navbar"],
       footerData: {
         ...footerData,
         officeRows: footerData.officeRows.map((item) => item.text),
@@ -66,13 +66,13 @@ export default function Home({
             key={item._uid}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-30% 0px -30% 0px" }}
+            viewport={{ once: false, margin: "-35% 0px -35% 0px" }}
             variants={fadeVariant}
             transition={{
               delay: 0.2,
               type: "spring",
               bounce: 0,
-              stiffness: 70,
+              stiffness: 90,
               damping: 35,
             }}
           >
