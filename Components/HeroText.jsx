@@ -38,7 +38,7 @@ const HeroText = ({
       setOffset(0);
       clearInterval(callback);
     };
-  }, [rotatingWordList]);
+  }, [rotatingWordList.length]);
 
   return (
     <div className="flex w-full items-center justify-center h-screen">
