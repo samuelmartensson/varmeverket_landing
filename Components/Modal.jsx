@@ -121,7 +121,7 @@ const Modal = ({ data }) => {
                 onChange={handleChange}
                 name="start"
                 id="start"
-                className="p-4 bg-black bg-opacity-80"
+                className="md:p-4 py-3.5 px-2 bg-black bg-opacity-80"
                 type="datetime-local"
               />
             </div>
@@ -135,7 +135,7 @@ const Modal = ({ data }) => {
                 onChange={handleChange}
                 name="end"
                 id="end"
-                className="p-4 bg-black bg-opacity-80"
+                className="md:p-4 py-3.5 px-2 bg-black bg-opacity-80"
                 type="datetime-local"
               />
             </div>

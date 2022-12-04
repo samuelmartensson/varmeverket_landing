@@ -30,7 +30,7 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
     <div ref={containerRef} className="flex justify-center">
       <div className="flex justify-center items-center">
         <div className="font-GtAmerica">
-          <h1 className="xl:text-6xl md:text-4xl text-xl">
+          <h1 className="xl:text-6xl md:text-4xl text-[22px]">
             {rows?.map((row, index) => (
               <div key={index} className="relative">
                 <div
@@ -47,7 +47,7 @@ const ExplainingText = ({ rows, prompt, cta = "" }) => {
             ))}
           </h1>
           {prompt && (
-            <h1 className="xl:text-6xl md:text-4xl text-xl lg:text-center md:mt-20 mt-12 relative">
+            <h1 className="xl:text-6xl md:text-4xl text-[22px] lg:text-center md:mt-20 mt-12 relative">
               <div
                 style={{
                   maxWidth: Math.max(scrollY - 15 * rows.length, 0) + "%",

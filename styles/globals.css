@@ -27,9 +27,11 @@
   src: url("../public/Fonts/GTAmerica/GTAmericaExtendedMedium.otf");
 }
 
-select {
+select,
+input {
   -webkit-appearance: none;
   appearance: none;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar {
