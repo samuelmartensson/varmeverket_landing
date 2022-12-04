@@ -1,17 +1,23 @@
 import { useScroll, motion, useTransform, useSpring } from "framer-motion";
 import { useLottie, useLottieInteractivity } from "lottie-react";
-import { useRef } from "react";
-import animation from "../public/Images/varmeverket_lottie.json";
+import { useEffect, useRef, useState } from "react";
 
 const LottieAnimation = ({ title }) => {
+  const [animationData, setAnimationData] = useState();
   const lottieObj = useLottie({
-    animationData: animation,
+    animationData: animationData,
     style: {
       width: "90vw",
       maxWidth: 1100,
       margin: "auto",
     },
   });
+
+  useEffect(() => {
+    import("../public/Images/varmeverket_lottie.json").then((data) => {
+      setAnimationData(data);
+    });
+  }, []);
 
   const Animation = useLottieInteractivity({
     lottieObj,
@@ -64,7 +70,7 @@ const LottieAnimation = ({ title }) => {
               <span className="font-bold leading-tight">{title?.bold}</span>
             </div>
           </h1>
-          {Animation}
+          {animationData ? Animation : "Loading blueprint..."}
         </div>
       </div>
     </>

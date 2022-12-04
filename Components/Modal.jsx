@@ -20,8 +20,10 @@ const Modal = ({ data }) => {
   const { setIsOpen, isOpen } = useModalContext();
 
   useEffect(() => {
-    getSpaces();
-  }, []);
+    if (isOpen && spaces.length === 0) {
+      getSpaces();
+    }
+  }, [isOpen, spaces.length]);
 
   useEffect(() => {
     toggle(isOpen);
@@ -33,8 +35,8 @@ const Modal = ({ data }) => {
     }
   }, [isLocalOpen, setIsOpen]);
 
-  async function getSpaces() {
-    await fetch("https://api.varmeverket.com/v2/spaces", { method: "GET" })
+  function getSpaces() {
+    fetch("https://api.varmeverket.com/v2/spaces")
       .then((response) => response.json())
       .then((data) => {
         setSpaces(data);
@@ -108,8 +110,8 @@ const Modal = ({ data }) => {
               ))}
             </select>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-2">
+          <div className="flex">
+            <div className="mr-4 grid gap-2 flex-1">
               <label className="text-white" htmlFor="start">
                 START DATE
               </label>
@@ -123,7 +125,7 @@ const Modal = ({ data }) => {
                 type="datetime-local"
               />
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-2 flex-1">
               <label className="text-white" htmlFor="end">
                 END DATE
               </label>

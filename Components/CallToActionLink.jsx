@@ -38,8 +38,8 @@ const CallToActionLink = ({ href, text = "" }) => {
 
   return (
     <div className="inline-block mt-5 md:mt-10">
-      <a
-        className="cursor-pointer font-bold text-2xl lg:text-5xl "
+      <button
+        className="cursor-pointer font-bold text-2xl lg:text-4xl "
         onClick={() => setIsOpen(true)}
       >
         <motion.div
@@ -73,7 +73,7 @@ const CallToActionLink = ({ href, text = "" }) => {
             className="h-0.5 bg-white"
           />
         </motion.div>
-      </a>
+      </button>
     </div>
   );
 };
