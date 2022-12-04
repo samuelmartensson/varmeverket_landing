@@ -2,10 +2,14 @@ import React from "react";
 import Constilation from "./Constilation";
 import ExplainingText from "./ExplainingText";
 import HeroText from "./HeroText";
-import LottieAnimation from "./LottieAnimation";
 import NoSSR from "./NoSSR";
 import ScrollingText from "./ScrollingText";
 import Spaces from "./Spaces";
+import dynamic from "next/dynamic";
+
+const LottieAnimation = dynamic(() =>
+  import("./LottieAnimation").then((mod) => mod.default)
+);
 
 const layoutClass =
   "min-h-[65vh] grid items-center p-6 m-auto max-w-7xl z-30 relative";
