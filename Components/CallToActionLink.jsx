@@ -40,7 +40,13 @@ const CallToActionLink = ({ href, text = "" }) => {
     <div className="inline-block mt-5 md:mt-10">
       <button
         className="cursor-pointer font-bold text-2xl lg:text-4xl "
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          if (href) {
+            window.open(href, "_blank");
+          } else {
+            setIsOpen(true);
+          }
+        }}
       >
         <motion.div
           className="inline-block"

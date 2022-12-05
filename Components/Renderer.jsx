@@ -36,6 +36,7 @@ const Renderer = (props) => {
           rows={props?.rows}
           prompt={{ left: props?.left, right: props?.right }}
           cta={props?.cta}
+          href={props?.href}
         />
       </div>
     );
@@ -61,7 +62,7 @@ const Renderer = (props) => {
         <Constilation
           imageHeader1={props?.headerThin}
           imageHeader2={props?.headerThick}
-          callToActionHref="/"
+          callToActionHref={props?.href}
           callToActionText={props?.callToActionText}
           items={props?.items}
         />
