@@ -37,7 +37,6 @@ const VerticalScrollItem = ({
   );
   const physics = { damping: 15, mass: 0.5, stiffness: 65 };
   const spring = useSpring(transform, physics);
-  console.log(srcList, cancelScroll);
   useEffect(() => {
     const callback = () => {
       if (!cancelScroll && index === currentIndex && !isSomethingPlaying) {
