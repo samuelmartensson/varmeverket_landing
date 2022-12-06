@@ -20,6 +20,7 @@ const VideoSlide = ({
     if (video) {
       if (video.paused) {
         video.play();
+        setIsLoaded(true);
       } else {
         video.pause();
       }
@@ -106,7 +107,9 @@ const VideoSlide = ({
         </div>
       )}
       <video
-        onLoadedData={() => setIsLoaded(true)}
+        onLoadedData={() => {
+          setIsLoaded(true);
+        }}
         onClick={handlePlayPause}
         onPause={() => {
           setIsPaused(true);
@@ -126,7 +129,7 @@ const VideoSlide = ({
         muted
         loop
       >
-        <source src={src} />
+        <source src={src + "#t=0.5"} />
       </video>
     </motion.div>
   );
