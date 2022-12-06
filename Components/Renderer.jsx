@@ -12,7 +12,7 @@ const LottieAnimation = dynamic(() =>
 );
 
 const layoutClass =
-  "min-h-[65vh] grid items-center p-6 m-auto max-w-7xl z-30 relative";
+  "md:min-h-[75vh] min-h-[95vh] grid items-center p-6 m-auto max-w-7xl z-30 relative";
 
 const Renderer = (props) => {
   const { component } = props;

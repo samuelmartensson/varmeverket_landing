@@ -6,18 +6,13 @@ const LottieAnimation = ({ title }) => {
   const [animationData, setAnimationData] = useState();
   const lottieObj = useLottie({
     animationData: animationData,
+    reversed: true,
     style: {
       width: "90vw",
       maxWidth: 1100,
       margin: "auto",
     },
   });
-
-  useEffect(() => {
-    import("../public/Images/varmeverket_lottie.json").then((data) => {
-      setAnimationData(data);
-    });
-  }, []);
 
   const Animation = useLottieInteractivity({
     lottieObj,
@@ -53,7 +48,16 @@ const LottieAnimation = ({ title }) => {
         className="relative w-full grid grid-cols-1 justify-center py-24"
       >
         <motion.div
-          className="absolute w-full"
+          onViewportEnter={() => {
+            if (!animationData) {
+              import("../public/Images/varmeverket_lottie.json").then(
+                (data) => {
+                  setAnimationData(data);
+                }
+              );
+            }
+          }}
+          className="absolute w-full pointer-events-none"
           style={{
             top: "-100%",
             height: "300vh",

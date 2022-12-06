@@ -22,8 +22,8 @@ const Footer = ({ data }) => {
   const { scrollYProgress } = useScroll();
   const { scrollYProgress: scrollYFade } = useScroll();
 
-  const transform = useTransform(scrollYProgress, [0.925, 0.95], [0, 100]);
-  const transformFade = useTransform(scrollYFade, [0.875, 0.925], [0, 1]);
+  const transform = useTransform(scrollYProgress, [0.95, 0.95001], [0, 100]);
+  const transformFade = useTransform(scrollYFade, [0.88, 0.8801], [0, 1]);
 
   const scroll = useSpring(transform, {
     stiffness: 100,
@@ -42,7 +42,7 @@ const Footer = ({ data }) => {
   return (
     <footer
       style={{ filter: `invert(${scrollY}%)` }}
-      className="bg-black relative mt-[50vh]"
+      className="bg-black relative pt-[15vh] mt-[15vh]"
     >
       <motion.div
         style={{
@@ -50,7 +50,7 @@ const Footer = ({ data }) => {
           opacity: scrollFade,
           background: "linear-gradient(0deg, black 75%, transparent)",
         }}
-        className="background bg-black pointer-events-none absolute top-0 w-full bg-blue h-[125vh] z-10"
+        className="background bg-black pointer-events-none absolute top-0 w-full bg-blue h-[175vh] z-0"
       />
       <div className="max-w-7xl min-h-screen text-white md:p-8 p-6 flex flex-col justify-center m-auto">
         <div className="max-w-3xl">

@@ -36,6 +36,8 @@ const lineVariant = {
 const CallToActionLink = ({ href, text = "" }) => {
   const { setIsOpen } = useModalContext();
 
+  if (!text) return null;
+
   return (
     <div className="inline-block mt-5 md:mt-10">
       <button

@@ -1,17 +1,31 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { useWindowSize } from "../hooks/useWindowSize";
+import VideoSlide from "./VideoSlide";
 
 function isProbablyImage(url) {
-  return url.match(/\.(jpeg|jpg|gif|png)$/) !== null;
+  return url.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null;
 }
 
-const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
-  const [isMuted, setIsMuted] = useState(true);
+const VerticalScrollItem = ({
+  srcList,
+  index,
+  currentIndex,
+  preload,
+  isMuted,
+  setIsMuted,
+}) => {
+  const [isSomethingPlaying, setIsSomethingPlaying] = useState(false);
   const [cancelScroll, setCancelScroll] = useState(true);
   const containerRef = useRef();
   const size = useWindowSize();
-  const videoRef = useRef();
   const { scrollY } = useScroll({
     container: containerRef,
   });
@@ -23,10 +37,10 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
   );
   const physics = { damping: 15, mass: 0.5, stiffness: 65 };
   const spring = useSpring(transform, physics);
-
+  console.log(srcList, cancelScroll);
   useEffect(() => {
     const callback = () => {
-      if (!cancelScroll && index === currentIndex) {
+      if (!cancelScroll && index === currentIndex && !isSomethingPlaying) {
         const scrollYPos = Math.abs(scrollY.get());
         const slide = Math.floor(Math.abs((scrollYPos - 1) / (height / 2)) + 1);
         const value = slide > srcList.length - 1 ? 0 : height * slide;
@@ -38,23 +52,15 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
     return () => {
       clearInterval(clear);
     };
-  }, [scrollY, height, cancelScroll, srcList.length, currentIndex, index]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      if (index === currentIndex) {
-        video.currentTime = 0;
-        video.play();
-        video.muted = false;
-        setIsMuted(false);
-      } else {
-        video.pause();
-        video.muted = true;
-        setIsMuted(true);
-      }
-    }
-  }, [index, currentIndex]);
+  }, [
+    scrollY,
+    height,
+    cancelScroll,
+    isSomethingPlaying,
+    srcList.length,
+    currentIndex,
+    index,
+  ]);
 
   return (
     <div
@@ -66,24 +72,45 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
       }}
       className="absolute top-0 w-full h-full"
     >
-      <div
+      <AnimatePresence>
+        {!cancelScroll && !isSomethingPlaying && srcList.length > 1 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ delay: 0.4, duration: 0.4 }}
+            style={{ filter: "invert(1)" }}
+            onClick={() => {
+              setIsMuted((s) => !s);
+            }}
+            className="pointer-events-none absolute bottom-4 flex justify-center left-0 right-0 z-20 cursor-pointer"
+          >
+            <img
+              style={{ filter: "invert(1)" }}
+              className="h-12"
+              alt="play"
+              src="/Images/thumbnail_scroll.png"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.div
         style={{ height, scrollSnapType: "y mandatory" }}
         ref={containerRef}
-        className="relative overflow-y-scroll z-10"
-        onClick={() => {
-          const video = videoRef.current;
-          if (video?.paused) {
-            video.play();
-          } else if (video) {
-            video.muted = !video.muted;
-            setIsMuted(video.muted);
-          }
+        className="relative overflow-y-scroll"
+        onViewportEnter={() => {
+          setCancelScroll(false);
+        }}
+        onViewportLeave={() => {
+          setCancelScroll(true);
         }}
         onTouchStart={() => {
           setCancelScroll(true);
         }}
         onTouchEnd={() => {
-          setCancelScroll(false);
+          setTimeout(() => {
+            setCancelScroll(false);
+          }, 2000);
           document.body.style = "";
         }}
         onMouseEnter={() => {
@@ -106,57 +133,34 @@ const VerticalScrollItem = ({ srcList, index, currentIndex }) => {
             <div key={index} style={{ height, scrollSnapAlign: "center" }} />
           ))}
         </div>
-      </div>
+      </motion.div>
       <motion.div
-        onViewportEnter={() => {
-          if (videoRef.current && index === currentIndex) {
-            videoRef.current.play();
-            videoRef.current.muted = false;
-            setIsMuted(false);
-          }
-          setCancelScroll(false);
-        }}
-        onViewportLeave={() => {
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            setIsMuted(true);
-            videoRef.current.pause();
-          }
-          setCancelScroll(true);
-        }}
-        key={index}
-        className="absolute top-0 w-full h-full"
         style={{
           y: spring,
         }}
+        key={index}
+        className="absolute top-0 w-full h-full pointer-events-none"
       >
-        {videoRef.current && (
-          <div className="absolute left-2 bottom-1 text-xs">
-            Sound: {!isMuted ? "on" : "off"}
-          </div>
-        )}
-        {srcList.map((src, index) => {
+        {srcList.map((src, srcIndex) => {
           return (
-            <div className="w-full h-full bg-gray-800" key={index}>
+            <div className="w-full h-full bg-gray-800" key={srcIndex}>
               {isProbablyImage(src) ? (
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className="w-full h-full object-cover"
-                    src={src}
-                    alt=""
-                  />
-                </>
+                <img className="w-full h-full object-cover" src={src} alt="" />
               ) : (
-                <video
-                  ref={videoRef}
-                  playsInline
-                  className="w-full h-full object-cover"
-                  muted
-                  loop
-                >
-                  <source src={src} />
-                </video>
+                <VideoSlide
+                  {...{
+                    src,
+                    preload,
+                    isMuted,
+                    setIsMuted,
+                    setIsSomethingPlaying,
+                  }}
+                  isCurrentHorizontal={index === currentIndex}
+                  isCurrentVertical={
+                    Math.round((scrollY.get() + 1) / (srcIndex * height)) ===
+                    srcIndex
+                  }
+                />
               )}
             </div>
           );
@@ -176,6 +180,7 @@ const HeaderImageNextPrev = ({
   items,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
 
   const next = useCallback(() => {
     setCurrentIndex((s) => (s === items.length - 1 ? 0 : s + 1));
@@ -204,17 +209,23 @@ const HeaderImageNextPrev = ({
         </div>
       </h2>
       <div>
-        <div className="relative h-72 lg:h-96 overflow-hidden">
+        <motion.div
+          onViewportLeave={() => {
+            setIsMuted(true);
+          }}
+          className="relative h-72 lg:h-96 overflow-hidden"
+        >
           {items.map((item, index) => {
             return (
               <VerticalScrollItem
+                preload={index === currentIndex}
                 srcList={item.srcList}
                 key={index}
-                {...{ currentIndex, index }}
+                {...{ currentIndex, index, isMuted, setIsMuted }}
               />
             );
           })}
-        </div>
+        </motion.div>
         <div className="flex justify-between mt-3">
           <button
             type="button"

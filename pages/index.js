@@ -64,6 +64,7 @@ export default function Home({
         {components.map((item) => (
           <motion.div
             key={item._uid}
+            className="relative z-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, margin: "-35% 0px -35% 0px" }}

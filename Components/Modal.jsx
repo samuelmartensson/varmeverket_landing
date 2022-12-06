@@ -27,6 +27,12 @@ const Modal = ({ data }) => {
 
   useEffect(() => {
     toggle(isOpen);
+
+    if (isOpen) {
+      document.body.style = "overflow: hidden";
+    } else {
+      document.body.style = "";
+    }
   }, [isOpen, toggle]);
 
   useEffect(() => {
@@ -73,7 +79,7 @@ const Modal = ({ data }) => {
       <form
         onSubmit={onSubmit}
         style={{ width: "clamp(300px, 90vw, 800px)" }}
-        className="relative grid m-auto p-4 bg-gray-600 bg-opacity-80"
+        className="relative grid m-auto p-4 bg-gray-600"
       >
         <button
           className="absolute right-4 top-4 font-GtAmericaExpandedBlack text-xs"
