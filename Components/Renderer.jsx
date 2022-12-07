@@ -58,7 +58,10 @@ const Renderer = (props) => {
 
   if (component === "Showcase") {
     return (
-      <div id={props?.scrollId} className={layoutClass}>
+      <div
+        id={props?.scrollId}
+        className="md:min-h-[75vh] min-h-[95vh] grid p-6 m-auto max-w-7xl z-30 relative"
+      >
         <Constilation
           imageHeader1={props?.headerThin}
           imageHeader2={props?.headerThick}
