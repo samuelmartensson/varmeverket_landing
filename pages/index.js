@@ -5,6 +5,7 @@ import Modal from "../Components/Modal";
 import { getStoryblokApi } from "@storyblok/react";
 import Renderer from "../Components/Renderer";
 import { motion } from "framer-motion";
+import Head from "next/head";
 
 export const getServerSideProps = async (context) => {
   const storyblokApi = getStoryblokApi();
@@ -57,6 +58,9 @@ export default function Home({
 
   return (
     <>
+      <Head>
+        <title>Värmeverket</title>
+      </Head>
       <BgSwirlVideo source="https://hypermedia.varmeverket.com/73_at_24s.mp4" />
       <NavBar data={navbarData} />
       <Modal data={modalData} />
