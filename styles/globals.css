@@ -3,28 +3,28 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "GT America Expanded";
-  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedRegular.otf");
+  font-family: 'GT America Expanded';
+  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedRegular.otf');
 }
 @font-face {
-  font-family: "GT America Expanded Black";
-  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedBlack.otf");
+  font-family: 'GT America Expanded Black';
+  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedBlack.otf');
 }
 @font-face {
-  font-family: "GT America Compressed";
-  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaCompressedRegular.otf");
+  font-family: 'GT America Compressed';
+  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaCompressedRegular.otf');
 }
 @font-face {
-  font-family: "GT America";
-  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaRegular.otf");
+  font-family: 'GT America';
+  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaRegular.otf');
 }
 @font-face {
-  font-family: "GT America Mono";
-  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaMonoRegular.otf");
+  font-family: 'GT America Mono';
+  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaMonoRegular.otf');
 }
 @font-face {
-  font-family: "GT America Extended Medium";
-  src: url("../public/Fonts/GTAmerica/GTAmericaExtendedMedium.otf");
+  font-family: 'GT America Extended Medium';
+  src: url('../public/Fonts/GTAmerica/GTAmericaExtendedMedium.otf');
 }
 
 select,

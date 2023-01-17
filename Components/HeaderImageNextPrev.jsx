@@ -180,7 +180,6 @@ const HeaderImageNextPrev = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-
   const next = useCallback(() => {
     setCurrentIndex((s) => (s === items.length - 1 ? 0 : s + 1));
     setItem((s) => ({
@@ -225,24 +224,26 @@ const HeaderImageNextPrev = ({
             );
           })}
         </motion.div>
-        <div className="flex justify-between mt-3">
-          <button
-            type="button"
-            onClick={() => {
-              previous();
-            }}
-          >
-            {prevText}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              next();
-            }}
-          >
-            {nextText}
-          </button>
-        </div>
+        {items.length > 1 && (
+          <div className="flex justify-between mt-3">
+            <button
+              type="button"
+              onClick={() => {
+                previous();
+              }}
+            >
+              {prevText}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                next();
+              }}
+            >
+              {nextText}
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CallToActionLink from "./CallToActionLink";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useScroll, useSpring, useTransform } from "framer-motion";
 
 const textClass = "text-stone-500 text-opacity-80 whitespace-nowrap";
 const textClassAbs =
@@ -50,7 +50,7 @@ const ExplainingText = ({ rows, prompt, cta = "", href }) => {
               </div>
             ))}
           </h1>
-          {prompt && (
+          {(prompt.left || prompt.right) && (
             <h1 className="xl:text-6xl md:text-4xl text-[22px] lg:text-center md:mt-20 mt-12 relative">
               <div
                 style={{
@@ -69,7 +69,7 @@ const ExplainingText = ({ rows, prompt, cta = "", href }) => {
             </h1>
           )}
           <div className="flex justify-center">
-            <CallToActionLink href={href} text={cta} />
+            {cta && <CallToActionLink href={href} text={cta} />}
           </div>
         </div>
       </div>

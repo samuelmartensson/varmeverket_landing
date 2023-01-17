@@ -17,7 +17,7 @@ const lineVariant = {
 
 let timer = null;
 
-const NavBarItem = ({ onClick, href, label }) => {
+const NavBarItem = ({ onClick, href, label, ...rest }) => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ const NavBarItem = ({ onClick, href, label }) => {
       onMouseLeave={() => setHover(false)}
       className="relative whitespace-nowrap cursor-pointer"
     >
-      <a onClick={onClick} href={href}>
+      <a onClick={onClick} href={href} {...rest}>
         {label}
       </a>
       <AnimatePresence mode="wait">
@@ -49,7 +49,7 @@ const NavBarItem = ({ onClick, href, label }) => {
 };
 
 export default function NavBar({ data }) {
-  const { socials, email, phoneNumber } = data;
+  const { socials, email, phoneNumber, items } = data;
   const router = useRouter();
   const { setIsOpen } = useModalContext();
   const [isHover, setIsHover] = useState(false);
@@ -171,23 +171,18 @@ export default function NavBar({ data }) {
             />
             {size.width > MENU_BREAKPOINT ? (
               <ul className="text-lg ml-auto flex items-center justify-between gap-16">
-                <NavBarItem
-                  onClick={() => handleNavigate("spaces")}
-                  href="https://www.varmeverket.com/sign-up"
-                  label="APPLY NOW"
-                />
-                <NavBarItem
-                  onClick={() => handleNavigate("spaces")}
-                  label="SPACES"
-                />
-                <NavBarItem
-                  onClick={() => handleNavigate("community")}
-                  label="COMMUNITY"
-                />
-                <NavBarItem
-                  onClick={() => handleNavigate("contact")}
-                  label="CONTACT"
-                />
+                {items.map((item) => (
+                  <NavBarItem
+                    key={item._uid}
+                    onClick={() =>
+                      item.url.startsWith("#")
+                        ? handleNavigate(item.url)
+                        : undefined
+                    }
+                    href={!item.url.startsWith("#") ? item.url : undefined}
+                    label={item.text}
+                  />
+                ))}
               </ul>
             ) : (
               <div
@@ -209,41 +204,23 @@ export default function NavBar({ data }) {
               >
                 <div className="relative text-left mt-24 mb-12">
                   <ul className="font-GtAmericaExpandedBlack text-4xl ">
-                    <li className="mb-8">
-                      <a
-                        className="cursor-pointer hover:underline"
-                        href="https://www.varmeverket.com/sign-up"
-                      >
-                        APPLY
-                      </a>
-                    </li>
-                    <li className="mb-8">
-                      <a
-                        className="cursor-pointer hover:underline"
-                        onClick={() => handleNavigate("community")}
-                        href="#community"
-                      >
-                        COMMUNITY
-                      </a>
-                    </li>
-                    <li className="mb-8">
-                      <a
-                        className="cursor-pointer hover:underline"
-                        onClick={() => handleNavigate("spaces")}
-                        href="#spaces"
-                      >
-                        SPACES
-                      </a>
-                    </li>
-                    <li className="mb-8">
-                      <a
-                        className="cursor-pointer hover:underline"
-                        onClick={() => handleNavigate("contact")}
-                        href="#contact"
-                      >
-                        CONTACT
-                      </a>
-                    </li>
+                    {items.map((item) => (
+                      <li key={item._uid} className="mb-8">
+                        <a
+                          className="cursor-pointer hover:underline"
+                          href={
+                            !item.url.startsWith("#") ? item.url : undefined
+                          }
+                          onClick={() =>
+                            item.url.startsWith("#")
+                              ? handleNavigate(item.url)
+                              : undefined
+                          }
+                        >
+                          {item.text}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                   <div>
                     <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>

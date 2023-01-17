@@ -7,7 +7,7 @@ const HeaderAndText = ({ text1, text2, text3 }) => {
         <span className="font-thin">{text1}</span>
         <span className="font-bold">{text2}</span>
       </div>
-      <p className="sm:text-base w-3/5">{text3}</p>
+      <p className="sm:text-base w-4/5">{text3}</p>
     </>
   );
 };
