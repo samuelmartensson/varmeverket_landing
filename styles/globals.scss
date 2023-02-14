@@ -3,28 +3,28 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'GT America Expanded';
-  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedRegular.otf');
+  font-family: "GT America Expanded";
+  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedRegular.otf");
 }
 @font-face {
-  font-family: 'GT America Expanded Black';
-  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedBlack.otf');
+  font-family: "GT America Expanded Black";
+  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaExpandedBlack.otf");
 }
 @font-face {
-  font-family: 'GT America Compressed';
-  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaCompressedRegular.otf');
+  font-family: "GT America Compressed";
+  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaCompressedRegular.otf");
 }
 @font-face {
-  font-family: 'GT America';
-  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaRegular.otf');
+  font-family: "GT America";
+  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaRegular.otf");
 }
 @font-face {
-  font-family: 'GT America Mono';
-  src: url('../public/Fonts/GTAmerica/WateredDown/GTAmericaMonoRegular.otf');
+  font-family: "GT America Mono";
+  src: url("../public/Fonts/GTAmerica/WateredDown/GTAmericaMonoRegular.otf");
 }
 @font-face {
-  font-family: 'GT America Extended Medium';
-  src: url('../public/Fonts/GTAmerica/GTAmericaExtendedMedium.otf');
+  font-family: "GT America Extended Medium";
+  src: url("../public/Fonts/GTAmerica/GTAmericaExtendedMedium.otf");
 }
 
 select,
@@ -157,5 +157,51 @@ h1 {
   body {
     color: white;
     background: black;
+  }
+}
+
+td {
+  border: 1px solid white;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+tbody {
+  display: grid;
+  height: 100%;
+}
+
+td {
+  border: 1px solid white;
+}
+
+tr:first-child td {
+  border-top: none;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr td:first-child {
+  border-left: none;
+}
+
+tr td:last-child {
+  border-right: none;
+}
+
+.landing-country-selector {
+  .country-selector {
+    bottom: 1rem !important;
+    top: unset !important;
+    position: fixed !important;
   }
 }
