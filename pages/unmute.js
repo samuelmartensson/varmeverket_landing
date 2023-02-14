@@ -18,7 +18,7 @@ const Unmute = () => {
         backgroundColor: "#e4e3e1",
       }}
     >
-      <div className="m-auto min-h-screen text-black p-4 grid xl:gap-4 xl:grid-rows-[1fr_minmax(800px,_77vh)] grid-rows-[64px_min-content_minmax(40vh,_1fr)]">
+      <div className="m-auto min-h-screen text-black p-4 grid xl:gap-4 xl:grid-rows-[1fr_minmax(800px,_77vh)] grid-rows-[64px_min-content_minmax(50vh,_1fr)]">
         <div className="flex border-b border-black pb-3 mb-4 xl:hidden">
           <div className="relative h-10 w-12">
             <Logo />
@@ -65,11 +65,11 @@ const Unmute = () => {
               alt="gradient"
             />
           </div>
-          <div className="absolute inset-0 top-6 grid place-items-center">
+          <div className="absolute inset-0 -top-8 grid place-items-center">
             <div className="grid xl:gap-16 place-items-center">
               <div className="text-xl xl:text-4xl mb-8">season one</div>
               <img
-                className="w-8/12 mb-20"
+                className="w-8/12 mb-10"
                 src="/Images/un_mute_display.png"
                 alt="gradient"
               />
