@@ -44,12 +44,7 @@ const Logo = () => (
 
 const Unmute = () => {
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundColor: "#e4e3e1",
-      }}
-    >
+    <div className="min-h-screen unmute-page">
       <div className="m-auto min-h-screen text-black p-4 grid xl:gap-4 xl:grid-rows-[min-content_auto] grid-rows-[64px_min-content_minmax(50vh,_1fr)]">
         <div className="flex border-b border-black pb-3 mb-4 xl:hidden">
           <div className="relative h-10 w-12">

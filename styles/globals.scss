@@ -160,9 +160,12 @@ h1 {
   }
 }
 
+.unmute-page {
+  background-color: #e4e3e1;
+}
+
 td {
-  border: 1px solid white;
-  color: black;
+  border: 1px solid #e4e3e1;
   width: 100%;
   height: 100%;
 }
@@ -176,10 +179,6 @@ table {
 tbody {
   display: grid;
   height: 100%;
-}
-
-td {
-  border: 1px solid white;
 }
 
 tr:first-child td {
