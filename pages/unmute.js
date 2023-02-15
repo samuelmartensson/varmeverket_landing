@@ -93,10 +93,10 @@ const Unmute = () => {
             />
             <div className="absolute inset-0 grid xl:grid-rows-[repeat(3,_33.333%)] xl:grid-cols-[repeat(4,_25%)] grid-cols-[1fr_1fr] grid-rows-[repeat(4,_1fr)]">
               <Grid />
-              <div className="lg:text-4xl text-xl grid place-items-center xl:col-start-auto col-start-2">
+              <div className="lg:text-4xl md:text-xl text-lg grid place-items-center xl:col-start-auto col-start-2">
                 season one
               </div>
-              <div className="m-auto xl:col-start-3 xl:row-start-1 row-start-3 col-start-2 w-10/12">
+              <div className="m-auto xl:col-start-1 xl:row-start-2 xl:col-span-4 row-start-3 col-start-1 col-span-2 max-w-xl w-8/12">
                 <img
                   className="xl:col-start-3 xl:col-span-2"
                   src="/Images/un_mute_display.png"
@@ -105,14 +105,24 @@ const Unmute = () => {
               </div>
               <a
                 href="/unmute/learn-more"
-                className="font-GTAmericaExpandedRegular break-all xl:translate-y-6 lg:translate-y-3 2xl:text-3xl xl:text-2xl text-sm xl:justify-self-start xl:row-start-3 xl:col-start-2 row-start-2 col-start-1 m-auto"
+                className="p-2 flex items-center font-GTAmericaExpandedRegular break-all 2xl:text-3xl xl:text-2xl text-[3vw] xl:justify-self-start xl:row-start-3 xl:col-start-2 row-start-2 col-start-1 m-auto"
               >
                 LEARN____MORE
+                <img
+                  className="xl:w-12 w-[4vw] xl:col-start-3 xl:col-span-2 drop-shadow-md"
+                  src="/Images/arrow.png"
+                  alt="gradient"
+                />
               </a>
               <a
                 href="/unmute/early-access"
-                className="font-GTAmericaExpandedRegular break-all xl:translate-y-6 lg:translate-y-3 2xl:text-3xl xl:text-2xl text-sm xl:justify-self-end xl:row-start-3 xl:col-start-4 m-auto row-start-4 col-start-1"
+                className="p-2 relative font-GTAmericaExpandedRegular break-all 2xl:text-3xl xl:text-2xl text-[3vw] xl:justify-self-end xl:row-start-3 xl:col-start-4 m-auto row-start-4 col-start-2"
               >
+                <img
+                  className="top-[30%] -translate-y-full left-[46%] -translate-x-1/2 absolute xl:w-12 w-[5vw] xl:col-start-3 xl:col-span-2 drop-shadow-md"
+                  src="/Images/eyes.png"
+                  alt="gradient"
+                />
                 EARLY____ACCESS
               </a>
             </div>
