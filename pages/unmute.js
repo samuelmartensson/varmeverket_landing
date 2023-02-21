@@ -22,7 +22,7 @@ const Grid = () => {
     );
 
   return (
-    <table className="absolute inset-0">
+    <table className="grid absolute inset-0">
       <tbody>
         <TableRow />
         <TableRow />
@@ -109,7 +109,7 @@ const Unmute = () => {
               >
                 LEARN____MORE
                 <img
-                  className="xl:w-12 w-[4vw] xl:col-start-3 xl:col-span-2 drop-shadow-md"
+                  className="xl:w-12 w-[4vw] min-w-[24px] xl:col-start-3 xl:col-span-2 drop-shadow-md"
                   src="/Images/arrow.png"
                   alt="gradient"
                 />
