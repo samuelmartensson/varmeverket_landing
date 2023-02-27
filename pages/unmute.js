@@ -163,7 +163,7 @@ const SectionTwo = () => (
       </p>
       <p>
         We primarily focus on supporting underrepresented artists in 127
-        Skarholmen.
+        Skärholmen.
       </p>
     </div>
   </div>
@@ -174,9 +174,11 @@ const SectionThree = () => (
     <div className="h-full border-2 border-black grid gap-8 grid-rows-[110px_1fr]">
       <div className="border-b-2 w-full border-black"></div>
       <div className="grid place-items-center text-black">
-        <div className="grid place-items-center gap-12">
-          <h2 className="lg:text-7xl text-5xl">residency</h2>
-          <div className="max-w-screen-md gap-8 flex lg:flex-row flex-col text-xl p-4">
+        <div className="grid place-items-center gap-12 p-4">
+          <h2 className="lg:text-7xl text-5xl justify-self-start lg:translate-x-2/4">
+            residency
+          </h2>
+          <div className="max-w-screen-lg gap-8 grid lg:grid-flow-col text-xl">
             <a href="#" className="whitespace-nowrap underline">
               Read more about our requirements
             </a>
@@ -193,7 +195,7 @@ const SectionThree = () => (
         </div>
         <div
           style={{ backgroundImage: "url(/Images/unmute_bg.png)" }}
-          className="m-4 lg:text-3xl border-2 border-black grid place-items-center grid-cols-2 w-11/12"
+          className="self-end mb-12 lg:text-3xl border-2 border-black grid place-items-center grid-cols-2 w-11/12"
         >
           <a
             href="#"
