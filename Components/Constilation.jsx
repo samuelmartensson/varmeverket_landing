@@ -29,7 +29,7 @@ function FullSize({
                 duration: 0.6,
                 easings: [0.65, 0, 0.35, 1],
               }}
-              key={headerText1}
+              key={headerText1 + headerText2}
             >
               <HeaderAndText
                 text1={headerText1}
@@ -93,7 +93,7 @@ function Mobile({
               duration: 0.6,
               easings: [0.65, 0, 0.35, 1],
             }}
-            key={headerText1}
+            key={headerText1 + headerText2}
           >
             <HeaderAndText
               text1={headerText1}
