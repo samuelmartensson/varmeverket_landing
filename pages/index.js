@@ -6,7 +6,6 @@ import { getStoryblokApi } from "@storyblok/react";
 import Renderer from "../Components/Renderer";
 import { motion } from "framer-motion";
 import Head from "next/head";
-import { useEffect } from "react";
 
 export const getServerSideProps = async (context) => {
   const storyblokApi = getStoryblokApi();
@@ -56,14 +55,6 @@ export default function Home({
       opacity: 1,
     },
   };
-
-  useEffect(() => {
-    document.body.classList.add("landing-country-selector");
-
-    return () => {
-      document.body.classList.remove("landing-country-selector");
-    };
-  }, []);
 
   return (
     <>
