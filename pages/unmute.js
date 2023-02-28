@@ -64,14 +64,6 @@ const Logo = ({ width = 70 }) => (
 const SectionOne = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style = "overflow: hidden";
-    } else {
-      document.body.style = "";
-    }
-  }, [menuOpen]);
-
   return (
     <div className="min-h-screen">
       <div className="m-auto min-h-screen text-black p-4 grid grid-rows-[132px_auto]">
@@ -123,7 +115,7 @@ const SectionOne = () => {
               alt="gradient"
             />
             {menuOpen ? (
-              <div className="border border-black z-10 lg:absolute fixed inset-0 lg:p-32 p-8">
+              <div className="border border-black z-10 lg:absolute fixed inset-0 overflow-auto lg:p-16 p-8">
                 <div className="relative lg:h-full z-10">
                   <div className="lg:hidden flex mb-16 justify-between">
                     <Logo width={60} />
@@ -170,7 +162,7 @@ const SectionOne = () => {
                   </div>
                 </div>
                 <img
-                  className="lg:hidden inset-0 absolute object-cover w-full h-full"
+                  className="lg:hidden inset-0 fixed object-cover min-h-screen"
                   src="/Images/unmute_bg.png"
                   alt="gradient"
                 />
@@ -186,6 +178,7 @@ const SectionOne = () => {
                 </a>
                 <div className="flex items-center h-full w-full m-auto lg:col-start-2 lg:row-start-2 lg:col-span-2 row-start-3 col-span-2">
                   <video
+                    playsInline
                     className="pointer-events-none mix-blend-lighten"
                     src="/Images/unmute.mp4"
                     alt="gradient"
