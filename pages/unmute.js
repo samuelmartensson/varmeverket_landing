@@ -7,10 +7,10 @@ const Grid = () => {
   const { width } = useWindowSize();
 
   const trClassName =
-    "grid xl:grid-cols-[repeat(4,_1fr)] grid-cols-[repeat(2,_1fr)]";
+    "grid lg:grid-cols-[repeat(4,_1fr)] grid-cols-[repeat(2,_1fr)]";
 
   const TableRow = () =>
-    width >= 1280 ? (
+    width >= 1024 ? (
       <tr className={trClassName}>
         <td></td>
         <td></td>
@@ -28,7 +28,7 @@ const Grid = () => {
     <table className="grid absolute inset-0">
       <tbody>
         <TableRow />
-        {width >= 1280 ? (
+        {width >= 1024 ? (
           <tr className={trClassName}>
             <td></td>
             <td style={{ gridColumn: "span 2" }}></td>
@@ -37,14 +37,15 @@ const Grid = () => {
         ) : (
           <TableRow />
         )}
-        {width < 1280 ? (
+        {width < 1024 ? (
           <tr className={trClassName}>
             <td style={{ gridColumn: "span 2" }}></td>
           </tr>
         ) : (
           <TableRow />
         )}
-        {width < 1280 && <TableRow />}
+        {width < 1024 && <TableRow />}
+        {width < 1024 && <TableRow />}
       </tbody>
     </table>
   );
@@ -66,7 +67,7 @@ const SectionOne = () => {
   return (
     <div className="min-h-screen">
       <div className="m-auto min-h-screen text-black p-4 grid grid-rows-[min-content_auto]">
-        <div className="mt-12 p-6 pb-10 flex justify-between relative border-2 border-b-0 border-black">
+        <div className="mt-12 p-6 pb-10 flex justify-between relative border border-b-0 border-black">
           <div className="inline-block my-auto ml-0 mr-auto">
             <Logo />
           </div>
@@ -106,15 +107,15 @@ const SectionOne = () => {
               src="/Images/unmute_bg.png"
               alt="gradient"
             />
-            <div className="absolute inset-0 grid xl:grid-rows-[repeat(3,_33.333%)] xl:grid-cols-[repeat(4,_25%)] grid-cols-[1fr_1fr] grid-rows-[repeat(4,_25%)]">
+            <div className="absolute inset-0 grid lg:grid-rows-[repeat(3,_33.333%)] lg:grid-cols-[repeat(4,_25%)] grid-cols-[1fr_1fr] grid-rows-[repeat(5,_20%)]">
               <Grid />
               <a
                 href="#residency"
-                className="duration-200 hover:bg-white/20 grid place-items-center 2xl:text-5xl xl:text-3xl text-xl xl:col-start-auto col-start-2"
+                className="duration-200 hover:bg-white/20 grid place-items-center 2xl:text-5xl xl:text-3xl text-xl"
               >
                 residency
               </a>
-              <div className="flex items-center h-full w-full m-auto xl:col-start-2 xl:row-start-2 xl:col-span-2 row-start-3 col-span-2">
+              <div className="flex items-center h-full w-full m-auto lg:col-start-2 lg:row-start-2 lg:col-span-2 row-start-3 col-span-2">
                 <video
                   className="pointer-events-none mix-blend-lighten"
                   src="/Images/unmute.mp4"
@@ -127,15 +128,21 @@ const SectionOne = () => {
               </div>
               <a
                 href="#"
-                className="duration-200 hover:bg-white/20 w-full h-full grid place-items-center break-all 2xl:text-5xl xl:text-3xl text-xl xl:justify-self-start xl:row-start-3 xl:col-start-2 row-start-2 col-start-1 m-auto"
+                className="duration-200 hover:bg-white/20 w-full h-full grid place-items-center break-all 2xl:text-5xl xl:text-3xl text-lg lg:justify-self-end lg:row-start-3 lg:col-start-4 m-auto row-start-2 col-start-2"
+              >
+                apply____now!
+              </a>
+              <a
+                href="#"
+                className="duration-200 hover:bg-white/20 w-full h-full grid place-items-center break-all 2xl:text-5xl xl:text-3xl text-lg lg:justify-self-start lg:row-start-3 lg:col-start-2 row-start-4 col-start-2 m-auto"
               >
                 learn____more
               </a>
               <a
                 href="#"
-                className="duration-200 hover:bg-white/20 w-full h-full grid place-items-center break-all 2xl:text-5xl xl:text-3xl text-xl xl:justify-self-end xl:row-start-3 xl:col-start-4 m-auto row-start-4 col-start-1"
+                className="lg:hidden duration-200 hover:bg-white/20 w-full h-full grid place-items-center break-all 2xl:text-5xl xl:text-3xl text-lg lg:justify-self-start lg:row-start-3 lg:col-start-2 row-start-5 col-start-1 m-auto"
               >
-                apply____now!
+                become_a_member
               </a>
             </div>
           </div>
@@ -148,7 +155,7 @@ const SectionOne = () => {
 const SectionTwo = () => (
   <div className="min-h-screen mt-20 flex p-4">
     <div
-      className="text-center grid place-items-center m-auto p-16 text-black text-lg"
+      className="text-center grid place-items-center m-auto lg:p-16 p-8 text-black text-lg"
       style={{
         maxWidth: 400,
         aspectRatio: 1 / 1,
@@ -171,18 +178,19 @@ const SectionTwo = () => (
 
 const SectionThree = () => (
   <div id="residency" className="min-h-screen mt-20 p-4 grid">
-    <div className="h-full border-2 border-black grid gap-8 grid-rows-[110px_1fr]">
-      <div className="border-b-2 w-full border-black"></div>
-      <div className="grid place-items-center text-black">
-        <div className="grid place-items-center gap-12 p-4">
-          <h2 className="lg:text-7xl text-5xl justify-self-start lg:translate-x-2/4">
-            residency
-          </h2>
-          <div className="max-w-screen-lg gap-8 grid lg:grid-flow-col text-xl">
-            <a href="#" className="whitespace-nowrap underline">
-              Read more about our requirements
+    <div className="h-full border border-black grid gap-8 grid-rows-[110px_1fr]">
+      <div className="border-b w-full border-black"></div>
+      <div className="grid place-items-center text-black lg:p-8 p-4">
+        <div className="grid place-items-center gap-12">
+          <h2 className="lg:text-7xl text-5xl">residency</h2>
+          <div className="max-w-screen-lg gap-8 grid lg:grid-cols-2 text-lg">
+            <a
+              href="#"
+              className="lg:justify-self-end whitespace-nowrap underline lg:row-start-1 row-start-2"
+            >
+              Learn more by reading our guidelines
             </a>
-            <div>
+            <div className="row-start-1">
               <p className="mb-4">
                 Our residency program primarily focuses on supporting the
                 diversed Community. Through this initiative, we aim to elevate
@@ -194,18 +202,21 @@ const SectionThree = () => (
           </div>
         </div>
         <div
-          style={{ backgroundImage: "url(/Images/unmute_bg.png)" }}
-          className="self-end mb-12 lg:text-3xl border-2 border-black grid place-items-center grid-cols-2 w-11/12"
+          style={{
+            backgroundImage: "url(/Images/unmute_bg.png)",
+            backgroundSize: "300%",
+          }}
+          className="self-end mt-12 mb-4 lg:text-3xl border border-black grid place-items-center md:grid-cols-2 w-full"
         >
           <a
             href="#"
-            className="duration-200 hover:bg-white/20 grid place-items-center lg:p-16 md:p-8 p-4 w-full h-full border-r-2 border-black/30"
+            className="duration-200 hover:bg-white/20 grid place-items-center lg:p-16 md:p-8 p-6 w-full h-full md:border-r border-black md:row-start-1 row-start-2"
           >
             LEARN__MORE
           </a>
           <a
             href="#"
-            className="duration-200 hover:bg-white/20 w-full h-full lg:p-16 md:p-8 p-4 grid place-items-center"
+            className="duration-200 hover:bg-white/20 w-full h-full lg:p-16 md:p-8 p-6 grid place-items-center row-start-1 md:border-none border-b border-black"
           >
             APPLY__NOW
           </a>
@@ -217,7 +228,7 @@ const SectionThree = () => (
 const Unmute = () => {
   return (
     <div className="unmute-page">
-      <div className="max-w-[1920px] m-auto">
+      <div className="max-w-screen-2xl m-auto">
         <SectionOne />
         <SectionTwo />
         <SectionThree />
