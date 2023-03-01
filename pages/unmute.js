@@ -63,13 +63,14 @@ const Logo = ({ width = 70 }) => (
 
 const SectionOne = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { width } = useWindowSize();
 
   return (
     <div className="min-h-screen">
       <div className="m-auto min-h-screen text-black p-4 grid grid-rows-[132px_auto]">
         <div className="mt-6 lg:p-8 p-4 flex items-center justify-between relative border border-b-0 border-black">
           <div className="inline-block my-auto ml-0 mr-auto">
-            <Logo />
+            <Logo width={width > 1024 ? 70 : 60} />
           </div>
           <div className="relative cursor-pointer grid place-items-center">
             {!menuOpen ? (
@@ -108,12 +109,14 @@ const SectionOne = () => {
           </div>
         </div>
         <div className="relative text-black">
-          <div className="w-full flex items-end h-full">
-            <img
-              className="object-cover w-full h-full"
-              src="/Images/unmute_bg.png"
-              alt="gradient"
-            />
+          <div
+            style={{
+              backgroundImage: "url(/Images/unmute_bg.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "50% 0%",
+            }}
+            className="w-full flex h-full"
+          >
             {menuOpen ? (
               <div className="border border-black z-10 lg:absolute fixed inset-0 overflow-auto lg:p-16 p-8">
                 <div className="relative lg:h-full z-10">
@@ -149,15 +152,19 @@ const SectionOne = () => {
                     <a href="#" className="lg:text-center text-left">
                       APPLY__NOW
                     </a>
-                  </div>
-                  <div className="lg:hidden mt-12">
-                    <div>+46 72 394 04 96</div>
-                    <a href="mailto:info@varmeverket.com">
-                      info@varmeverket.com
-                    </a>
-                    <div className="grid gap-6 grid-flow-col mt-4 w-min">
-                      <a className="underline">instagram</a>
-                      <a className="underline">tiktok</a>
+                    <div className="font-GtAmerica text-lg mt-12 lg:flex flex-row-reverse gap-8 lg:m-auto">
+                      <div>+46 72 394 04 96</div>
+                      <a href="mailto:info@varmeverket.com">
+                        info@varmeverket.com
+                      </a>
+                      <div className="grid gap-6 grid-flow-col lg:m-0 mt-4 w-min">
+                        <a href="#" className="underline">
+                          instagram
+                        </a>
+                        <a href="#" className="underline">
+                          tiktok
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -168,7 +175,7 @@ const SectionOne = () => {
                 />
               </div>
             ) : (
-              <div className="absolute inset-0 grid lg:grid-rows-[repeat(3,_33.333%)] lg:grid-cols-[repeat(4,_25%)] grid-cols-[1fr_1fr] grid-rows-[repeat(5,_20%)]">
+              <div className="grid lg:grid-rows-[repeat(3,_33.333%)] lg:grid-cols-[repeat(4,_25%)] grid-cols-[1fr_1fr] grid-rows-[repeat(5,_20%)]">
                 <Grid />
                 <a
                   href="#residency"
@@ -243,8 +250,8 @@ const SectionTwo = () => (
 
 const SectionThree = () => (
   <div id="residency" className="lg:min-h-[80vh] mt-20 p-4 grid">
-    <div className="h-full border-2 border-black grid gap-8 grid-rows-[110px_1fr]">
-      <div className="border-b-2 w-full border-black"></div>
+    <div className="h-full border border-black grid gap-8 grid-rows-[110px_1fr]">
+      <div className="border-b w-full border-black"></div>
       <div className="grid place-items-center text-black p-4">
         <div className="grid place-items-center gap-12">
           <h2 className="lg:text-7xl text-5xl lg:-translate-x-1/4 lg:place-self-center place-self-start">
@@ -274,7 +281,7 @@ const SectionThree = () => (
             backgroundSize: "130%",
             backgroundPosition: "0% 100%",
           }}
-          className="self-end mb-8 lg:text-3xl border-2 border-black grid place-items-center md:grid-cols-2 w-full mt-8"
+          className="self-end mb-8 lg:text-3xl border border-black grid place-items-center md:grid-cols-2 w-full mt-8"
         >
           <a
             href="#"
