@@ -301,8 +301,10 @@ const SectionThree = () => (
   </div>
 );
 const Unmute = () => {
+  const { width } = useWindowSize();
+
   return (
-    <div className="unmute-page">
+    <div key={width} className="unmute-page">
       <div className="max-w-screen-2xl m-auto">
         <SectionOne />
         <SectionTwo />
